@@ -10,9 +10,9 @@
         </div>
 
         <div class="btn-group" style="width:100%">
-                <button style="width:33.3%">Home</button>
-                <button style="width:33.3%">News</button>
-                <button style="width:33.3%" onclick="change_page()">Log-In</button>
+                <button style="width:33.3%" value="index.html" onclick="change_page(value)">Home</button>
+                <button style="width:33.3%" value="news.html" onclick="change_page(value)">News</button>
+                <button style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
 
         <div class="location-grp">
@@ -38,8 +38,8 @@
         </div>
     </body>
       <script>
-        function change_page() {
-          window.location.href = "loginPage.html";
+        function change_page(value) {
+          window.location.href = value;
         }
       </script>
 </html>
