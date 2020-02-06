@@ -1,0 +1,43 @@
+.header h1{
+  display: inline;
+  font-size: 50px;
+}
+
+.header img {
+  position: relative;
+  width: 90%;
+  height:100px;
+}
+.header{
+  display: flex;
+ align-items:center;
+}
+.btn-group button {
+  background-color: blue; /* Green background */
+  border: 1px solid white; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: lightblue;
+}
+
+fieldset{
+   font-size: 10px;
+   width: 400px;
+   height: 65px;
+   margin: auto;
+}
