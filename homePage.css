@@ -34,3 +34,10 @@
   .btn-group button:hover {
     background-color: lightblue;
   }
+
+ fieldset{
+     font-size: 10px;
+     width: 400px;
+     height: 65px;
+     margin: auto;
+ }
