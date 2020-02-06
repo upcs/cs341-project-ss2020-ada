@@ -1,17 +1,21 @@
-.header h1{
-  display: inline;
+
+
+#header {
+  background-image: url('../images/Pdx-skyline.jpg');
+  width: 100%;
+  height:150px;
+}
+h1 {
   font-size: 50px;
+  color: white;
+  font-style: italic;
 }
 
-.header img {
+/*.header img {
   position: relative;
   width: 90%;
   height:100px;
-}
-.header{
-  display: flex;
- align-items:center;
-}
+}*/
 .btn-group button {
   background-color: blue; /* Green background */
   border: 1px solid white; /* Green border */
