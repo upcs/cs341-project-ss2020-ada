@@ -9,9 +9,9 @@
         </div>
 
         <div class="btn-group" style="width:100%">
-                <button style="width:33.3%">Home</button>
-                <button style="width:33.3%">News</button>
-                <button style="width:33.3%">Log-In</button>
+                <button style="width:33.3%" value="index.html" onclick="change_page(value)">Home</button>
+                <button style="width:33.3%" value="news.html" onclick="change_page(value)">News</button>
+                <button style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
 
         <div class="location-grp">
@@ -20,7 +20,7 @@
                             <legend>Location information:</legend>
                             Street Address:
                             <input type="text" name="address" value="">
-                            Name: 
+                            Name:
                             <input type="text" name="Name" value=""><br>
                             Zipcode:
                             <input type="text" name="zipcode" value="">
@@ -29,11 +29,16 @@
                                     <option value="blue">Blue</option>
                                     <option value="green">Green</option>
                                     <option value="orange">Orange</option>
-                            </select> 
+                            </select>
                             <input type="submit" value="Save">
                           </fieldset>
-                
+
             </form>
         </div>
     </body>
+      <script>
+        function change_page(value) {
+          window.location.href = value;
+        }
+      </script>
 </html>
