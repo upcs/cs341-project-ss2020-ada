@@ -4,16 +4,17 @@
             <link rel="stylesheet" href="./stylesheets/homePage.css">
     </head>
     <body>
+        <!--Heading with Logo-->
         <div id="header">
             <h1>P.E.R.U</h1>
         </div>
-
+        <!--Button Bar-->
         <div class="btn-group" style="width:100%">
                 <button style="width:33.3%" value="index.html" onclick="change_page(value)">Home</button>
                 <button style="width:33.3%" value="news.html" onclick="change_page(value)">News</button>
                 <button style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
-
+        <!--Form for saving a location to your account-->
         <div class="location-grp">
             <form>
                     <fieldset>
@@ -35,6 +36,10 @@
 
             </form>
         </div>
+
+        <!--About us button which will take you to about us page-->
+        <button id="aboutUs">About Us</button>
+        
     </body>
       <script>
         function change_page(value) {
