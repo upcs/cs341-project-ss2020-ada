@@ -35,22 +35,44 @@
     background-color: lightblue;
   }
 
-  /* centering the title for the page*/
-  #mission{
-      font-size: 75px;
-      font-family: cursive;
-      text-align: center;
-  }
-  #purpose{
-    margin-left: 10px;
-    margin-top:10px;
-    margin-bottom: 10px;
-    font-size: 120%;
-  }
-  #earthquake{
-    width:300px;
-     height:300px;
-     float: left;
-      margin-right: 10px;
+  #mission { color: #111; font-family: Copperplate / Copperplate Gothic Light, sans-serif; font-size: 150px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
+
+
+  h2 { color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: 300; line-height: 32px; margin: 0 0 72px; text-align: center; }
+  .flex-container {
+    display: flex;
+    flex-direction: row;
+    background-color: lightblue;
+    box-shadow: 10px 10px 5px royalblue;
   }
   
+  .flex-container > div {
+    background-color: #9ac5d6;
+    width: 100px;
+    margin: 10px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 100px;
+  }
+  #text {
+    width: 33%;
+    /*height: 400px;*/
+    padding: 15px;
+    
+  }
+  #purpose { color: black;  font-family: 'Helvetica Neue', sans-serif; font-size: 14px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; }
+  #contactinfo{
+    width: 33%;
+    /*height: 400px;*/
+    padding: 15px;
+  }
+  #contact{
+    color: black;  font-family: 'Helvetica Neue', sans-serif; font-size: 25px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; 
+  }
+  #howto{
+    width:33%;
+    padding:15px
+  }
+  #instructions{
+    color: black;  font-family: 'Helvetica Neue', sans-serif; font-size: 25px; line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; 
+  }
