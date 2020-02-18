@@ -35,13 +35,13 @@ h1 {
     background-color: lightblue;
   }
 
-#news{
-    font-size:100px;
-    font-family: cursive;
-    text-align: center;
-}
+#news { color: #111; font-family: Copperplate / Copperplate Gothic Light, sans-serif; font-size: 150px; font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
 #aboutUs {
-    position: absolute;
+    position: relative;
     bottom: 0%;
     margin-left: 47%;
+  }
+
+  a:visited {
+    color: purple;
   }
