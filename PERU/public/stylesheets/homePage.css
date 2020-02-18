@@ -44,7 +44,7 @@ fieldset{
 }
 
 #aboutUs {
-  position: absolute;
+  position: relative;
   bottom: 0%;
   margin-left: 47%;
 }
