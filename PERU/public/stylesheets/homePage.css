@@ -56,6 +56,7 @@ fieldset{
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
 }
 
+
 /* The sidepanel links */
 .sidepanel a {
   padding: 8px 8px 8px 32px;
@@ -97,7 +98,6 @@ fieldset{
 .openbtn:hover {
   background-color: lightblue;
 }
-
 #aboutUs {
   position: relative;
   bottom: 0%;
