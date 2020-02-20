@@ -4,25 +4,21 @@ var dbms = require("./dbms.js");
 
 /*
 @author Sam Lemly
-CS341A
-Handling script to process new customer orders.
+CS341A - Ada PERU
+Handling script to process new users.
 */
 
 router.post('/', function(req, res, next){
+
+    //parse variables from request body
     var usrname =  req.body.name; 
     var usrpw = req.body.pw; 
-    //parse variables from request body
     var loc1name  = req.body.loc1name;
     var loc1x = req.body.loc1x;
     var loc1y = req.body.loc1y;
     var loc2name  = req.body.loc2name;
     var loc2x = req.body.loc2x;
     var loc2y = req.body.loc2y;
-
-
-    // generate random order ID. Assumed to be unique.
-    var uniqueID = Math.floor(Math.random()*100000); 
-    // Format insertion string for sql usage.
 
 /**
  * Database query layout is as follows - 
@@ -43,14 +39,19 @@ router.post('/', function(req, res, next){
  * | user_email | char(30) | YES  |     | NULL    |       |
  * 
  */
+
+    // Format insertion string for sql usage.
     var insert_str = "INSERT INTO peru_users " 
                 + "VALUES ('"
-                + uniqueID 
-                +"', '" + month
-                + "', " + day 
-                + ", '" + quantity 
-                + "', '"+ topping 
-                +"', '"+ notes 
+                + usrname 
+                +"', '" + usrpw
+                + "', " + loc1name 
+                + ", '" + loc1x 
+                + "', '"+ loc1y 
+                +"', '"+ loc2name 
+                +"', '"+ loc2x
+                +"', '"+ loc2y
+                +"', '"+ user_email 
                 +"');"
     dbms.dbquery(insert_str,
             function(err, results){
@@ -64,7 +65,7 @@ This inclusion is intended to mirror the behavior seen in orders.js .
 The response is passed in case a response is needed at some point.
 */
 function finishInsert(res){
-    console.log("Successful insertion of new order into database.");
+    console.log("Successful insertion of new user data into database.");
 }
 
 //testing function to make sure json is formatted correctly.
