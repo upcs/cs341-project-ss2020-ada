@@ -2,7 +2,7 @@
  * dbms.js
  *
  * This file contains functions for accessing the MySQL database
- * which contains the Cheesecake order data.
+ * which contains PERU user data
  *
  */
 
@@ -12,7 +12,7 @@ var mysql = require('mysql'),
     async = require('async');
 
 var host = "34.82.61.129";    //from GCloud instance (change to match your db)
-var database = "adaperu";  //database name
+var database = "perudb";  //database name
 var user = "perudb_admin";
 var password = "absolutelynotperudbpass"; 
 

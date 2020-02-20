@@ -8,24 +8,42 @@ CS341A
 Handling script to process new customer orders.
 */
 
-/*
-Post request response function.
-Called from hw2.js in response to the order button being clicked.
-Creates a unique ID for the order, and inserts the order into the database.
-Simply logs a message with an external function on success. The inclusion of 
-the external function is intended to mirror the behavior seen in orders.js .
-*/
 router.post('/', function(req, res, next){
-    var month =  "OCT"; // hardcoded month
-    var day = '31'; // this is my birthday
+    var usrname =  req.body.name; 
+    var usrpw = req.body.pw; 
     //parse variables from request body
-    var topping = req.body.topping;
-    var notes = req.body.notes;
-    var quantity = req.body.quantity;
+    var loc1name  = req.body.loc1name;
+    var loc1x = req.body.loc1x;
+    var loc1y = req.body.loc1y;
+    var loc2name  = req.body.loc2name;
+    var loc2x = req.body.loc2x;
+    var loc2y = req.body.loc2y;
+
+
     // generate random order ID. Assumed to be unique.
     var uniqueID = Math.floor(Math.random()*100000); 
     // Format insertion string for sql usage.
-    var insert_str = "INSERT INTO ORDERS " 
+
+/**
+ * Database query layout is as follows - 
+ * |username|password|loc1_name|loc1x|loc1y|loc2_name|loc2x|loc2y|user_email|
+ *  
+ * 
+ * Datatypes are as follows.
+ * |  Field     | Type     | Null | Key | Default | Extra |
+ * +------------+----------+------+-----+---------+-------+
+ * | username   | char(30) | YES  |     | NULL    |       |
+ * | password   | char(30) | YES  |     | NULL    |       |
+ * | loc1_name  | char(20) | YES  |     | NULL    |       |
+ * | loc1x      | float    | YES  |     | NULL    |       |
+ * | loc1y      | float    | YES  |     | NULL    |       |
+ * | loc2_name  | char(20) | YES  |     | NULL    |       |
+ * | loc2x      | float    | YES  |     | NULL    |       |
+ * | loc2y      | float    | YES  |     | NULL    |       |
+ * | user_email | char(30) | YES  |     | NULL    |       |
+ * 
+ */
+    var insert_str = "INSERT INTO peru_users " 
                 + "VALUES ('"
                 + uniqueID 
                 +"', '" + month
