@@ -1,11 +1,8 @@
 const button = document.querySelector('.btn')
 const form   = document.querySelector('.form')
 
-button.addEventListener('click', function() {
-   form.classList.add('form--no') 
-});
 
-$(".btn").click(function() {
+$(button).click(function() {
    /*External Citation: https://www.w3schools.com/jquery/jquery_dom_set.asp */
        var user = $("#user").text();
        var email = $("#email").text();
