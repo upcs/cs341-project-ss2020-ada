@@ -18,14 +18,14 @@
                 <button style="width:33.3%" value="news.html" onclick="change_page(value)">News</button>
                 <button style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
-        
+
         <!--Form for saving a location to your account-->
         <div class="location-grp">
             <form>
                     <fieldset>
                             <legend>Location information:</legend>
                             Street Address:
-                            <input type="text" name="address" value="">
+                            <input id="addressID" type="textbox" name="address" value="">
                             Name:
                             <input type="text" name="Name" value=""><br>
                             Zipcode:
@@ -36,11 +36,11 @@
                                     <option value="green">Green</option>
                                     <option value="orange">Orange</option>
                             </select>
-                            <input type="submit" value="Save">
+                            <input id="submitButton" type="button" value="Save">
                           </fieldset>
 
             </form>
-        
+
             <div id="mySidepanel" class="sidepanel">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                 <input id ="filters" type="radio" name="select2" value="link1" /><span>Medical Centers</span><br />
@@ -48,7 +48,7 @@
                 <input id ="filters" type="radio" name="select2" value="link3" /><span>Medical Centers</span><br />
                 <input id="submit" type="submit" value="Apply">
                 </div>
-              
+
               <button class="openbtn" onclick="openNav()">&#9776; Filters</button>
         </div>
         <div class="inner" id="mapContent" style=" padding-top: 10px; padding-bottom: 10px; width:800px; height:600px;">Included Data</div>
