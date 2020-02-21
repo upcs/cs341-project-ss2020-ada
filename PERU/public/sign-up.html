@@ -1,26 +1,28 @@
 <!-- External Citation: https://codepen.io/dope/pen/ZQWBeL-->
 <head>
     <link rel="stylesheet" href="./stylesheets/sign-up.css">
-    <link rel="javascript" href="./javascripts/signup.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+        </script>
+    
 </head>
 <div class="user">
     <header class="user__header">
         <h1 class="user__title">P.E.R.U</h1>
     </header>
-    
     <form class="form">
         <div class="form__group">
             <input type="text" id="user" placeholder="Username" class="form__input" />
         </div>
-        
         <div class="form__group">
             <input type="email" id="email" placeholder="Email" class="form__input" />
         </div>
-        
         <div class="form__group">
             <input type="password" id="password" placeholder="Password" class="form__input" />
         </div>
-        
-        <button class="btn" type="submit" onclick="changePage()">Register</button>
+        <button class="btn" id="submitButton" type="submit" value="index.html">
+            <!-- onclick="changePage(value)" -->
+            Register</button>
     </form>
+    <script src="./javascripts/signup.js">
+    </script>
 </div>

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router(); 
 var dbms = require("./dbms.js");
+// var body_parser = require('body_parser'); 
 
 /*
 @author Sam Lemly
@@ -9,16 +10,23 @@ Handling script to process new users.
 */
 
 router.post('/', function(req, res, next){
-
+    console.log(req.body);
+    console.log(req.body.name);
+    // console.log("****************************** \n \n \n ");
     //parse variables from request body
-    var usrname =  req.body.name; 
-    var usrpw = req.body.pw; 
-    var loc1name  = req.body.loc1name;
-    var loc1x = req.body.loc1x;
-    var loc1y = req.body.loc1y;
-    var loc2name  = req.body.loc2name;
-    var loc2x = req.body.loc2x;
-    var loc2y = req.body.loc2y;
+    var usrname =  req.body.name,
+        usrpw = req.body.pw,
+        loc1name  = req.body.loc1name,
+        loc1x = req.body.loc1x,
+        loc1y = req.body.loc1y,
+        loc2name  = req.body.loc2name,
+        loc2x = req.body.loc2x,
+        loc2y = req.body.loc2y;
+
+    console.log(usrname);
+    console.log(usrpw);
+
+    
 
 /**
  * Database query layout is as follows - 
@@ -41,22 +49,13 @@ router.post('/', function(req, res, next){
  */
 
     // Format insertion string for sql usage.
-    var insert_str = "INSERT INTO peru_users " 
-                + "VALUES ('"
-                + usrname 
-                +"', '" + usrpw
-                + "', " + loc1name 
-                + ", '" + loc1x 
-                + "', '"+ loc1y 
-                +"', '"+ loc2name 
-                +"', '"+ loc2x
-                +"', '"+ loc2y
-                +"', '"+ user_email 
-                +"');"
+    var insert_str = "INSERT INTO peru_users VALUES ('"+ usrname +"', '"+ usrpw+"', '"+ loc1name +"', '"+ loc1x +"', '"+ loc1y +"', '"+ loc2name +"', '"+ loc2x+"', '"+ loc2y+"', '"+ user_email +"');"
+    console.log(insert_str);
     dbms.dbquery(insert_str,
-            function(err, results){
-                finishInsert(res);
-    });
+        function(err, results){
+            finishInsert(res);
+        }
+    );
 });
 
 /*
@@ -68,11 +67,4 @@ function finishInsert(res){
     console.log("Successful insertion of new user data into database.");
 }
 
-//testing function to make sure json is formatted correctly.
-//identical to orders.js.
-function retrieveOrders(monthQuery){
-    return orderData;   
-};
-
 module.exports.router = router;
-module.exports.retrieveOrders=retrieveOrders;
