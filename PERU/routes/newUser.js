@@ -14,14 +14,15 @@ router.post('/', function(req, res, next){
     console.log(req.body.name);
     // console.log("****************************** \n \n \n ");
     //parse variables from request body
-    var usrname =  req.body.name,
-        usrpw = req.body.pw,
+    var usrname =  req.body.usrname,
+        usrpw = req.body.usrpw,
         loc1name  = req.body.loc1name,
         loc1x = req.body.loc1x,
         loc1y = req.body.loc1y,
         loc2name  = req.body.loc2name,
         loc2x = req.body.loc2x,
-        loc2y = req.body.loc2y;
+        loc2y = req.body.loc2y,
+        user_email = req.body.user_email;
 
     console.log(usrname);
     console.log(usrpw);

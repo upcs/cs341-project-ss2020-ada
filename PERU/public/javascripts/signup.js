@@ -8,7 +8,8 @@
 //    form.classList.add('form--no') 
 // });
 console.log("jjasjdfjsjfjdfasodijsijdfjasdjsajjajdfs")
-$('.btn').click(function(){
+$('.btn').click(function(event){
+   event.preventDefault();
    //External Citation: https://www.w3schools.com/jquery/jquery_dom_set.asp
    var user = $('#user').val();
    var email = $('#email').val();
@@ -18,12 +19,12 @@ $('.btn').click(function(){
       { 
          usrname: user,  
          usrpw: password, 
-         loc1name: "0", 
-         loc1x: "0", 
-         loc1y: "0", 
-         loc2name: "0", 
-         loc2x: "0", 
-         loc2y: "0",  
+         loc1name: 0, 
+         loc1x: 0, 
+         loc1y: 0, 
+         loc2name: 0, 
+         loc2x: 0, 
+         loc2y: 0,  
          user_email: email 
       },
       function(status){console.log("Post request sent");}, 
