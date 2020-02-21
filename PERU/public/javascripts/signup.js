@@ -16,3 +16,6 @@ $(".btn").click(function() {
                
            }, "json"); 
     });
+    function changePage() {
+      window.location.href = "index.html";
+    }
