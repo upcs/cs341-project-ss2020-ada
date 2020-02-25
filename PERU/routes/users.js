@@ -15,8 +15,9 @@ router.post('/', function(req, res, next) {
   console.log(userVar);
 
   /*External Citation: https://stackoverflow.com/questions/41168942/how-to-input-a-nodejs-variable-into-an-sql-query/41172686*/
-  dbms.dbquery("Select * FROM peru_users where username='" + userVar + "'",
+  dbms.dbquery("Select * FROM peru_users WHERE username='" + userVar + "'",
     function(err, data){
+        console.log(data);
         queryData(data, res);
     }
     );
@@ -28,10 +29,15 @@ function queryData(data, res){
 
   //send data in json form
     //push data to an array
-     array.push({Username: data[0].username, password: data[0].password});
+    for(var i = 0; i<data.length; i++)
+    {
+      //push data to an array
+      array.push({Username: data[i].username, password: data[i].password});
+    }
+    
   
   //sending the array back
   res.json(array);
   console.log("pushed data");
 }
-module.exports = router;
+module.exports.router = router;

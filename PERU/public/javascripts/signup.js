@@ -8,10 +8,20 @@ $(document).ready(function(){
       // Processing the response
       $.post("/users",{
          usrname: user },
-         function(err, res){
-            console.log(err);
-            console.log(res);
-            if(res.body.Username == user){
+         function(data){
+            //console.log(err);
+            console.log(data);
+            //var found = "false";
+   
+            for (var i = 0; i<data.length; i++){
+               console.log(data[i].Username);
+               if(data[i].Username == user){
+                  alert("User already exists. Please pick a new username.");
+                   console.log("User creation error - user already exists");
+                  var found = "true";
+               }
+            }
+            if(found == "true"){
                alert("User already exists. Please pick a new username.");
                console.log("User creation error - user already exists");
             }
