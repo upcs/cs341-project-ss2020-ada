@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router(); 
 var dbms = require("./dbms.js");
-// var body_parser = require('body_parser'); 
 
 /*
 @author Sam Lemly
@@ -21,17 +20,9 @@ router.post('/', function(req, res, next){
         loc2x = req.body.loc2x,
         loc2y = req.body.loc2y,
         user_email = req.body.user_email;
-
-    console.log(usrname);
-    console.log(usrpw);
-
-    
-
 /**
  * Database query layout is as follows - 
  * |username|password|loc1_name|loc1x|loc1y|loc2_name|loc2x|loc2y|user_email|
- *  
- * 
  * Datatypes are as follows.
  * |  Field     | Type     | Null | Key | Default | Extra |
  * +------------+----------+------+-----+---------+-------+
@@ -48,7 +39,17 @@ router.post('/', function(req, res, next){
  */
 
     // Format insertion string for sql usage.
-    var insert_str = "INSERT INTO peru_users VALUES ('"+ usrname +"', '"+ usrpw+"', '"+ loc1name +"', '"+ loc1x +"', '"+ loc1y +"', '"+ loc2name +"', '"+ loc2x+"', '"+ loc2y+"', '"+ user_email +"');"
+    var insert_str = "INSERT INTO peru_users VALUES ('"
+                + usrname 
+                +"', '" + usrpw
+                +"', '"+ loc1name 
+                +"', '"+ loc1x 
+                +"', '"+ loc1y 
+                +"', '"+ loc2name 
+                +"', '"+ loc2x
+                +"', '"+ loc2y
+                +"', '"+ user_email 
+                +"');"
     console.log(insert_str);
     dbms.dbquery(insert_str,
         function(err, results){
