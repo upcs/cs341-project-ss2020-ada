@@ -41,7 +41,11 @@
         document.getElementById('submitButton').addEventListener('click', function() {
           geocodeAddress(geocoder, map);
         });
-      } // Close of Initialize Map function
+      document.getElementById('submit').addEventListener('click', function() {
+        var filterSelect = document.querySelector('input[name = "select2"]:checked').value;
+        getFilter(filterSelect, map);
+      });
+    } // Close of Initialize Map function
 
       function geocodeAddress(geocoder, resultsMap) {
           var address = document.getElementById('addressID').value;
@@ -57,6 +61,15 @@
             }
           });
         }
+
+      function getFilter(filtOP, map){
+        if (filtOP == "urm"){
+          map.data.loadGeoJson('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
+        } else if (filtOP == "tier1"){
+          map.data.loadGeoJson('https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
+        }
+      }
+
  // Close of geocodeAddress function
     </script>
     <script async defer
