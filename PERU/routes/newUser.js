@@ -10,8 +10,6 @@ Handling script to process new users.
 */
 
 router.post('/', function(req, res, next){
-    console.log(req.body);
-    console.log(req.body.name);
     // console.log("****************************** \n \n \n ");
     //parse variables from request body
     var usrname =  req.body.usrname,
