@@ -27,11 +27,9 @@ function queryData(data, res){
   var array = [];
 
   //send data in json form
-  for(var i = 0; i<data.length; i++)
-  {
     //push data to an array
-     array.push({Username: data[i].username, password: data[i].password});
-  }
+     array.push({Username: data[0].username, password: data[0].password});
+  
   //sending the array back
   res.json(array);
   console.log("pushed data");
