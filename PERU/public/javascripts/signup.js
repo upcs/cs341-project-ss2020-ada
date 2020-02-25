@@ -16,7 +16,6 @@ $(document).ready(function(){
             for (var i = 0; i<data.length; i++){
                console.log(data[i].Username);
                if(data[i].Username == user){
-                  alert("User already exists. Please pick a new username.");
                    console.log("User creation error - user already exists");
                   var found = "true";
                }
