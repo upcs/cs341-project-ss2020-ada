@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $('#login').click(function() {
+  $(login).click(function() {
     var user = $("#username").val();
     var pass = $("#password").val();
     $.post("/users",{usrname: user}, function(data) {
