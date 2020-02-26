@@ -5,7 +5,7 @@ $(document).ready(function(){
     $.post("/users",{usrname: user}, function(data) {
         for (var i = 0; i<data.length; i++){
           if(data[i].Username == user){
-              console.log("user found");
+            console.log("user found");
             var found = "true";
           }
       }
@@ -15,7 +15,7 @@ $(document).ready(function(){
       }
       else{
         alert("wrong username: try again");
-          console.log("wrong username");
+        console.log("wrong username");
       }   
       }, "json"
       );
