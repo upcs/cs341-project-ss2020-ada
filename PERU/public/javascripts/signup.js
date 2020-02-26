@@ -8,8 +8,8 @@ $(document).ready(function(){
       var email = $('#email').val();
       var password = $('#password').val();
       // Processing the response
-      $.post("/users",{
-         usrname: user },
+      $.post("/signUp",{
+         usrname: user},
          function(data){
             //console.log(err);
             console.log(data);

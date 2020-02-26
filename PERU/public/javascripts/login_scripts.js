@@ -1,11 +1,11 @@
 $(document).ready(function(){
   $(login).click(function() {
-    var user = $("#username").val();
-    var pass = $("#password").val();
-    $.post("/users",{usrname: user}, function(data) {
+    var user = $(username).val();
+    var pass = $(password).val();
+    $.post("/users",{ usrname: user, password: pass }, function(data) {
         for (var i = 0; i<data.length; i++){
-          if(data[i].Username == user){
-              console.log("user found");
+          if(data[i].Username == user && data[i].password == pass){
+            console.log("user found");
             var found = "true";
           }
       }
@@ -15,7 +15,7 @@ $(document).ready(function(){
       }
       else{
         alert("wrong username: try again");
-          console.log("wrong username");
+        console.log("wrong username or password");
       }   
       }, "json"
       );
