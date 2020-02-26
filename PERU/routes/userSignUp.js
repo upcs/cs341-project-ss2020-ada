@@ -12,12 +12,12 @@ router.post('/', function(req, res, next) {
 
   //getting the user from the post 
   var userVar = req.body.usrname;
-  var passVar = req.body.password;
+
   console.log(userVar);
-  console.log(passVar);
+  
 
   /*External Citation: https://stackoverflow.com/questions/41168942/how-to-input-a-nodejs-variable-into-an-sql-query/41172686*/
-  dbms.dbquery("Select * FROM peru_users WHERE username='" + userVar + "' and password='" + passVar + "'",
+  dbms.dbquery("Select * FROM peru_users WHERE username='" + userVar + "'",
     function(err, data){
         console.log(data);
         queryData(data, res);
