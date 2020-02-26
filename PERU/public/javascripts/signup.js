@@ -1,3 +1,5 @@
+$ = require('jquery');
+
 $(document).ready(function(){
    $('.btn').click(function(event){
       event.preventDefault();
@@ -50,3 +52,10 @@ function insertNewUser(user, email, password){
          }, 
          "json");
 }
+
+function check(email){
+	var pattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z0-9]+$/	
+	return pattern.test(email);
+}
+
+module.exports = check;
