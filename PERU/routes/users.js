@@ -10,7 +10,7 @@ router.post('/', function(req, res, next) {
   console.log("req body");
   console.log(req.body);
 
-  //getting the month from the post 
+  //getting the user from the post 
   var userVar = req.body.usrname;
   console.log(userVar);
 
