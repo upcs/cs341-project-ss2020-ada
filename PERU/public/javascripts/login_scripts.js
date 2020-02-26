@@ -1,8 +1,8 @@
 $(document).ready(function(){
   $(login).click(function() {
-    var user = $("#username").val();
+    var user = $(username).val();
     var pass = $("#password").val();
-    $.post("/users",{usrname: user}, function(data) {
+    $.post("/users",{ usrname: user }, function(data) {
         for (var i = 0; i<data.length; i++){
           if(data[i].Username == user){
             console.log("user found");
