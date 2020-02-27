@@ -1,4 +1,4 @@
-var $ = require('../../node_modules/jquery');
+//var $ = require('../../node_modules/jquery');
 
 $(document).ready(function(){
    $('.btn').click(function(event){
@@ -28,6 +28,7 @@ $(document).ready(function(){
             }
             else{
                console.log("Attempting to insert user...");
+               alert("You are registered!");
                insertNewUser(user,email,password);
             }   
          }, "json"); 
