@@ -3,8 +3,7 @@
 function change_page(value) {
     window.location.href = value;
   }
-  
- module.exports = {
-	openNav: function() {document.getElementById("mySidepanel").style.width = "250px";},
-	closeNav: function() {document.getElementById("mySidepanel").style.width = "0";}
-}
+ function openNav(){document.getElementById("mySidepanel").style.width = "250px";}
+ function closeNav() {document.getElementById("mySidepanel").style.width = "0";}
+ module.exports.openNav;
+ module.exports.closeNav;
