@@ -1,4 +1,4 @@
-
+// var $ = require('../../node_modules/jquery');
 
 $(document).ready(function(){
 
@@ -13,6 +13,7 @@ $(document).ready(function(){
          usrname: user},
          function(data){
             //console.log(err);
+            console.log("data")
             console.log(data);
             //var found = "false";
             for (var i = 0; i<data.length; i++){
@@ -30,7 +31,6 @@ $(document).ready(function(){
                console.log("Attempting to insert user...");
                alert("You are registered!");
                insertNewUser(user,email,password);
-               return_home();
             }   
          }, "json"); 
    }); 
@@ -51,6 +51,7 @@ function insertNewUser(user, email, password){
          },
          function(status){
             console.log(status);
+            return_home();
          }, 
          "json");
 }
