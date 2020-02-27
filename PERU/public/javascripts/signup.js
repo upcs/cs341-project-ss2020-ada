@@ -30,6 +30,7 @@ $(document).ready(function(){
                console.log("Attempting to insert user...");
                alert("You are registered!");
                insertNewUser(user,email,password);
+               return_home();
             }   
          }, "json"); 
    }); 
@@ -59,4 +60,7 @@ function check(email){
 	return pattern.test(email);
 }
 
+function return_home() {
+   window.location.href = "index.html";
+ }
 module.exports = check;
