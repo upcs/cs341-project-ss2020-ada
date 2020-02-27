@@ -10,7 +10,6 @@ exports.version = '0.0.1';
 
 var mysql = require('mysql'),
     async = require('async');
-
 var host = '34.82.61.129';    //from GCloud instance (change to match your db)
 var database = "perudb";  //database name
 var user = "perudb_admin";

@@ -1,4 +1,4 @@
-$ = require('jquery');
+var $ = require('../../node_modules/jquery');
 
 $(document).ready(function(){
    $('.btn').click(function(event){

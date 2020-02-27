@@ -1,5 +1,6 @@
 var check = require('../public/javascripts/signup');
 
+
 test('valid email', () => {
   expect(check('harrah20@up.edu')).toBeTruthy();
 });

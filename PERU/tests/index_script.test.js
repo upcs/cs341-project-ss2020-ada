@@ -1,5 +1,6 @@
 'use strict';
 var fs = require('fs');
+var $ = require('../node_modules/jquery');
 const methods = require('../public/javascripts/index_script.js');
 
  test('opening navigation panel', () => {
