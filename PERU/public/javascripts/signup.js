@@ -1,4 +1,4 @@
-var $ = require('../../node_modules/jquery');
+//var $ = require('../../node_modules/jquery');
 
 $(document).ready(function(){
    $('.btn').click(function(event){
@@ -28,7 +28,9 @@ $(document).ready(function(){
             }
             else{
                console.log("Attempting to insert user...");
+               alert("You are registered!");
                insertNewUser(user,email,password);
+               return_home();
             }   
          }, "json"); 
    }); 
@@ -58,4 +60,7 @@ function check(email){
 	return pattern.test(email);
 }
 
+function return_home() {
+   window.location.href = "index.html";
+ }
 module.exports = check;
