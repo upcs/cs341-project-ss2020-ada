@@ -28,8 +28,10 @@ $(document).ready(function(){
             return_home();
         }
         else{
-          alert("wrong username: try again");
+          alert("wrong username or password: try again");
           console.log("wrong username or password");
+          console.log(user);
+          console.log(pass);
         }   
         }, "json"
         );
