@@ -1,6 +1,7 @@
-//var $ = require('../../node_modules/jquery');
+// var $ = require('../../node_modules/jquery');
 
 $(document).ready(function(){
+
    $('.btn').click(function(event){
       event.preventDefault();
       //External Citation: https://www.w3schools.com/jquery/jquery_dom_set.asp
@@ -14,7 +15,6 @@ $(document).ready(function(){
             //console.log(err);
             console.log(data);
             //var found = "false";
-   
             for (var i = 0; i<data.length; i++){
                console.log(data[i].Username);
                if(data[i].Username == user){
