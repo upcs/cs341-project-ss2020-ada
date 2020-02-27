@@ -1,4 +1,4 @@
-// var $ = require('../../node_modules/jquery');
+
 
 $(document).ready(function(){
 

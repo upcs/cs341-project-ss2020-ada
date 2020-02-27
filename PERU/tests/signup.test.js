@@ -1,4 +1,9 @@
+var $ = require('../node_modules/jquery');
+window.$ = $;
 var check = require('../public/javascripts/signup');
+
+
+
 
 
 test('valid email', () => {
