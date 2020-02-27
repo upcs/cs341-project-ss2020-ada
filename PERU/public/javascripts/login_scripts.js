@@ -7,7 +7,7 @@ $(document).ready(function(){
   }
   $(login).click(function() {
     if(windowWhoAmI != 'null'){
-      alert("You are logged out now");
+      alert("You are now logged out");
       localStorage.setItem("whoami",'null');
       return_home();
     }
