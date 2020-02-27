@@ -3,7 +3,7 @@ window.onload = function(){
   var windowWhoAmI = localStorage.getItem("whoami");
   var currButtonText = "";
   console.log(windowWhoAmI);
-  if(windowWhoAmI == 'null'){
+  if(windowWhoAmI == null){
     currButtonText = "Login";
     document.getElementById('loginButton').innerHTML = currButtonText;
   }
