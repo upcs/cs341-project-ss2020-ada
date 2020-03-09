@@ -87,15 +87,15 @@
         }
       }
       function setData(map, url){
-      $.getJSON(url, function (data) {
-          dataMarkers = map.data.addGeoJson(data);
-          google.maps.event.addDomListener(document.getElementById('remove'), 'click', function (data) {
-          alert(dataMarkers);
-          // Setup event handler to remove GeoJSON features
-            for (var i = 0; i < dataMarkers.length; i++)
-              map.data.remove(dataMarkers[i]);
-                });
+        $.getJSON(url, function (data) {
+            dataMarkers = map.data.addGeoJson(data);
+            google.maps.event.addDomListener(document.getElementById('remove'), 'click', function (data) {
+            alert(dataMarkers);
+            // Setup event handler to remove GeoJSON features
+              for (var i = 0; i < dataMarkers.length; i++)
+                map.data.remove(dataMarkers[i]);
             });
+        });
       }
     </script>
     <script async defer
