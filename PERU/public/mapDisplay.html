@@ -15,36 +15,46 @@
   <body>
     <div id="map"></div>
     <script>
-    var markers = [];
+    var userMarkers = [];
+    var dataMarkers = [];
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
     var PORTLAND_OREGON_BOUNDS = {
-    north: 45.5140699,
-    south: 45.5140702,
-    west: -122.7057000001,
-    east: -130.81,
+    north: 46.0140699,
+    south: 45.0140702,
+    west: -123.705,
+    east: -124.81,
     };
     var UNIVPORT = {lat: 45.51407, lng: -122.7057 };
 
-      function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: UNIVPORT,
-          restriction: {
-            latLngBounds: PORTLAND_OREGON_BOUNDS,
-            strictBounds: true,
-          },
-          disableDefaultUI: true,
-          zoom: 9,
-        });
-        // Create a geoencorder that will translate location details into coordinates
-        var geocoder = new google.maps.Geocoder();
-        document.getElementById('submitButton').addEventListener('click', function() {
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: UNIVPORT,
+        restriction: {
+          latLngBounds: PORTLAND_OREGON_BOUNDS,
+          strictBounds: true,
+        },
+        disableDefaultUI: true,
+        zoom: 9,
+      });
+
+      // Create a geoencorder that will translate location details into coordinates
+      var geocoder = new google.maps.Geocoder();
+      document.getElementById('submitButton').addEventListener('click', function() {
           geocodeAddress(geocoder, map);
         });
-      document.getElementById('submit').addEventListener('click', function() {
+      document.getElementById('apply').addEventListener('click', function() {
         var filterSelect = document.querySelector('input[name = "select2"]:checked').value;
-        getFilter(filterSelect, map);
+        dataMarkers.push.apply(dataMarkers, getFilter(filterSelect, map));
       });
+
+      google.maps.event.addDomListener(document.getElementById('remove'), 'click', function () {
+
+          for (var i = 0; i < dataMarkers.length; i++){
+                console.log(i);
+                map.data.remove(dataMarkers[i]);
+            }
+          });
     } // Close of Initialize Map function
 
       function geocodeAddress(geocoder, resultsMap) {
@@ -56,17 +66,27 @@
                 position: results[0].geometry.location,
                 label: labels[labelIndex++ % labels.length]
               });
+              userMarkers.push(marker);
             } else {
               alert('Address could not be found, please try again.');
             }
           });
         }
 
+   // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
       function getFilter(filtOP, map){
         if (filtOP == "urm"){
-          map.data.loadGeoJson('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
+
+          $.getJSON('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson', function (data) {
+              var features = map.data.addGeoJson(data);
+          });
+          return features;
+
+        //  map.data.loadGeoJson('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
         } else if (filtOP == "tier1"){
           map.data.loadGeoJson('https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
+        } else if (filtOP == "medCent"){
+
         }
       }
 
