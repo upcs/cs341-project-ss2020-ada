@@ -15,7 +15,6 @@
   <body>
     <div id="map"></div>
     <script>
-    var userMarkers = [];
     var dataMarkers = [];
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
@@ -38,6 +37,8 @@
         zoom: 9,
       });
 
+      var userMarkers = [];
+
       // Create a geoencorder that will translate location details into coordinates
       var geocoder = new google.maps.Geocoder();
       document.getElementById('submitButton').addEventListener('click', function() {
@@ -45,16 +46,17 @@
         });
       document.getElementById('apply').addEventListener('click', function() {
         var filterSelect = document.querySelector('input[name = "select2"]:checked').value;
-        dataMarkers.push.apply(dataMarkers, getFilter(filterSelect, map));
+        getFilter(filterSelect, map, dataMarkers);
+        //alert(dataMarkers);
       });
 
-      google.maps.event.addDomListener(document.getElementById('remove'), 'click', function () {
 
+      /*google.maps.event.addDomListener(document.getElementById('remove'), 'click', function (data) {
+          alert(dataMarkers);
           for (var i = 0; i < dataMarkers.length; i++){
-                console.log(i);
                 map.data.remove(dataMarkers[i]);
             }
-          });
+          });*/
     } // Close of Initialize Map function
 
       function geocodeAddress(geocoder, resultsMap) {
@@ -74,14 +76,9 @@
         }
 
    // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
-      function getFilter(filtOP, map){
+      function getFilter(filtOP, map, dataMarkers){
         if (filtOP == "urm"){
-
-          $.getJSON('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson', function (data) {
-              var features = map.data.addGeoJson(data);
-          });
-          return features;
-
+              setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
         //  map.data.loadGeoJson('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
         } else if (filtOP == "tier1"){
           map.data.loadGeoJson('https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
@@ -89,11 +86,20 @@
 
         }
       }
-
- // Close of geocodeAddress function
+      function setData(map, url){
+      $.getJSON(url, function (data) {
+          dataMarkers = map.data.addGeoJson(data);
+          google.maps.event.addDomListener(document.getElementById('remove'), 'click', function (data) {
+          alert(dataMarkers);
+          // Setup event handler to remove GeoJSON features
+            for (var i = 0; i < dataMarkers.length; i++)
+              map.data.remove(dataMarkers[i]);
+                });
+            });
+      }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">
     </script>
   </body>
 </html>
