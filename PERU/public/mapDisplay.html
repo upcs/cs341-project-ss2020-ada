@@ -78,19 +78,23 @@
    // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
       function getFilter(filtOP, map, dataMarkers){
         if (filtOP == "urm"){
-              setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
-        //  map.data.loadGeoJson('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
+          setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
         } else if (filtOP == "tier1"){
-          map.data.loadGeoJson('https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
+          setData(map, 'https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
         } else if (filtOP == "medCent"){
 
         }
       }
+
       function setData(map, url){
         $.getJSON(url, function (data) {
-            dataMarkers = map.data.addGeoJson(data);
-            google.maps.event.addDomListener(document.getElementById('remove'), 'click', function (data) {
-            alert(dataMarkers);
+            markers = map.data.addGeoJson(data);
+            if( dataMarkers.length != 0){
+              dataMarkers = [...dataMarkers, ...markers];
+            } else {
+              dataMarkers = markers;
+            }
+            google.maps.event.addDomListener(document.getElementById('clear'), 'click', function (data) {
             // Setup event handler to remove GeoJSON features
               for (var i = 0; i < dataMarkers.length; i++)
                 map.data.remove(dataMarkers[i]);
