@@ -18,6 +18,7 @@
   <div id="map"></div>
   <script>
     var dataMarkers = [];
+    var userMarkers = [];
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
     var PORTLAND_OREGON_BOUNDS = {
@@ -41,9 +42,6 @@
         disableDefaultUI: true,
         zoom: 9,
       });
-
-      var userMarkers = [];
-
       // Create a geoencorder that will translate location details into coordinates
       var geocoder = new google.maps.Geocoder();
       document.getElementById('submitButton').addEventListener('click', function() {
@@ -52,16 +50,7 @@
       document.getElementById('apply').addEventListener('click', function() {
         var filterSelect = document.querySelector('input[name = "select2"]:checked').value;
         getFilter(filterSelect, map, dataMarkers);
-        //alert(dataMarkers);
       });
-
-
-      /*google.maps.event.addDomListener(document.getElementById('remove'), 'click', function (data) {
-          alert(dataMarkers);
-          for (var i = 0; i < dataMarkers.length; i++){
-                map.data.remove(dataMarkers[i]);
-            }
-          });*/
     } // Close of Initialize Map function
 
     function geocodeAddress(geocoder, resultsMap) {
@@ -75,6 +64,7 @@
             position: results[0].geometry.location,
             label: labels[labelIndex++ % labels.length]
           });
+
           userMarkers.push(marker);
         } else {
           alert('Address could not be found, please try again.');
