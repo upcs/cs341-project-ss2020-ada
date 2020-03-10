@@ -38,12 +38,12 @@ h1 {
 
 fieldset{
    font-size: 10px;
-   width: 400px;
-   height: 65px;
-   margin: auto;
+   width: 100px;
+   height: 100px;
+   margin: left;
 }
 .sidepanel {
-  margin-top: 350px;
+  margin-top: 265px;
   height: 250px; /* Specify a height */
   width: 0; /* 0 width - change this with JavaScript */
   position: absolute; /* Stay in place */
