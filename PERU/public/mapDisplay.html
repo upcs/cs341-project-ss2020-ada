@@ -1,30 +1,35 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-    <meta charset="utf-8">
-    <title>Map Bounds Restriction</title>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
+
+<head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <title>Map Bounds Restriction</title>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <script>
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
     var dataMarkers = [];
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
     var PORTLAND_OREGON_BOUNDS = {
-    north: 46.0140699,
-    south: 45.0140702,
-    west: -123.705,
-    east: -124.81,
+      north: 45.9140699,
+      south: 45.0140702,
+      west: -123.405,
+      east: -121.909,
     };
-    var UNIVPORT = {lat: 45.51407, lng: -122.7057 };
+    var UNIVPORT = {
+      lat: 45.51407,
+      lng: -122.7057
+    };
 
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
@@ -42,8 +47,8 @@
       // Create a geoencorder that will translate location details into coordinates
       var geocoder = new google.maps.Geocoder();
       document.getElementById('submitButton').addEventListener('click', function() {
-          geocodeAddress(geocoder, map);
-        });
+        geocodeAddress(geocoder, map);
+      });
       document.getElementById('apply').addEventListener('click', function() {
         var filterSelect = document.querySelector('input[name = "select2"]:checked').value;
         getFilter(filterSelect, map, dataMarkers);
@@ -59,51 +64,53 @@
           });*/
     } // Close of Initialize Map function
 
-      function geocodeAddress(geocoder, resultsMap) {
-          var address = document.getElementById('addressID').value;
-          geocoder.geocode({'address': address}, function(results, status) {
-            if (status === 'OK') {
-              var marker = new google.maps.Marker({
-                map: resultsMap,
-                position: results[0].geometry.location,
-                label: labels[labelIndex++ % labels.length]
-              });
-              userMarkers.push(marker);
-            } else {
-              alert('Address could not be found, please try again.');
-            }
+    function geocodeAddress(geocoder, resultsMap) {
+      var address = document.getElementById('addressID').value;
+      geocoder.geocode({
+        'address': address
+      }, function(results, status) {
+        if (status === 'OK') {
+          var marker = new google.maps.Marker({
+            map: resultsMap,
+            position: results[0].geometry.location,
+            label: labels[labelIndex++ % labels.length]
           });
+          userMarkers.push(marker);
+        } else {
+          alert('Address could not be found, please try again.');
         }
+      });
+    }
 
-   // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
-      function getFilter(filtOP, map, dataMarkers){
-        if (filtOP == "urm"){
-          setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
-        } else if (filtOP == "tier1"){
-          setData(map, 'https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
-        } else if (filtOP == "medCent"){
+    // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
+    function getFilter(filtOP, map, dataMarkers) {
+      if (filtOP == "urm") {
+        setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
+      } else if (filtOP == "tier1") {
+        setData(map, 'https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
+      } else if (filtOP == "medCent") {
 
-        }
       }
+    }
 
-      function setData(map, url){
-        $.getJSON(url, function (data) {
-            markers = map.data.addGeoJson(data);
-            if( dataMarkers.length != 0){
-              dataMarkers = [...dataMarkers, ...markers];
-            } else {
-              dataMarkers = markers;
-            }
-            google.maps.event.addDomListener(document.getElementById('clear'), 'click', function (data) {
-            // Setup event handler to remove GeoJSON features
-              for (var i = 0; i < dataMarkers.length; i++)
-                map.data.remove(dataMarkers[i]);
-            });
+    function setData(map, url) {
+      $.getJSON(url, function(data) {
+        markers = map.data.addGeoJson(data);
+        if (dataMarkers.length != 0) {
+          dataMarkers = [...dataMarkers, ...markers];
+        } else {
+          dataMarkers = markers;
+        }
+        google.maps.event.addDomListener(document.getElementById('clear'), 'click', function(data) {
+          // Setup event handler to remove GeoJSON features
+          for (var i = 0; i < dataMarkers.length; i++)
+            map.data.remove(dataMarkers[i]);
         });
-      }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">
-    </script>
-  </body>
+      });
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">
+  </script>
+</body>
+
 </html>
