@@ -35,16 +35,19 @@ h1 {
 .btn-group button:hover {
   background-color: lightblue;
 }
-
-fieldset{
-   font-size: 10px;
-   width: 100px;
-   height: 100px;
-   margin: left;
+.info{
+  height: auto;
+  width:100%;
 }
-.sidepanel {
-  margin-top: 265px;
-  height: 250px; /* Specify a height */
+.info fieldset{
+   font-size: 10px;
+   width: 500px;
+   height: 55px;
+}
+
+ .info .sidepanel {
+  margin-top: 275px;
+  height: 300px; /* Specify a height */
   width: 0; /* 0 width - change this with JavaScript */
   position: absolute; /* Stay in place */
   z-index: 2; /* Stay on top */
@@ -57,7 +60,7 @@ fieldset{
 }
 
 /* The sidepanel links */
-.sidepanel a {
+.info .sidepanel a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -65,16 +68,16 @@ fieldset{
   display: block;
   transition: 0.3s;
 }
-.sidepanel span{
+.info .sidepanel span{
   color: darkblue;
 }
 /* When you mouse over the navigation links, change their color */
-.sidepanel a:hover {
+.info .sidepanel a:hover {
   color: #f1f1f1;
 }
 
 /* Position and style the close button (top right corner) */
-.sidepanel .closebtn {
+.info .sidepanel .closebtn {
   position: absolute;
   top: 0;
   right: 25px;
@@ -83,20 +86,21 @@ fieldset{
 }
 
 /* Style the button that is used to open the sidepanel */
-.openbtn {
+.info .openbtn {
   font-size: 20px;
   cursor: pointer;
   background-color: blue;
   color: white;
   padding: 10px 15px;
   border: none;
+  float:left;
 }
 #filters{
   color: white;
 }
-.openbtn:hover {
+ .info .openbtn:hover {
   background-color: lightblue;
-}
+} 
 
 #aboutUs {
   position: relative;
@@ -115,8 +119,9 @@ fieldset{
     display: table-cell;
     vertical-align: middle;
 }
-.inner {
+ .inner {
     margin-left: auto;
     margin-right: auto;
-    width: 400px;
+    width: 100%;
+    height:auto;
 }
