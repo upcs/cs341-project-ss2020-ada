@@ -42,6 +42,7 @@
         disableDefaultUI: true,
         zoom: 9,
       });
+
       // Create a geoencorder that will translate location details into coordinates
       var geocoder = new google.maps.Geocoder();
       document.getElementById('submitButton').addEventListener('click', function() {
@@ -64,7 +65,6 @@
             position: results[0].geometry.location,
             label: labels[labelIndex++ % labels.length]
           });
-
           userMarkers.push(marker);
         } else {
           alert('Address could not be found, please try again.');
@@ -77,9 +77,6 @@
       if (filtOP == "urm") {
       setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
       // Add a marker clusterer to manage the markers.
-      var markerCluster = new MarkerClusterer(map, dataMarkers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-      alert(markerCluster);
       } else if (filtOP == "tier1") {
         setData(map, 'https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
       } else if (filtOP == "medCent") {
@@ -103,8 +100,6 @@
         });
       });
     }
-  </script>
-  <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js">
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">
   </script>
