@@ -17,6 +17,8 @@
 <body>
   <div id="map"></div>
   <script>
+    var data_layer_1;
+    var data_layer_2;
     var dataMarkers = [];
     var userMarkers = [];
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -42,6 +44,9 @@
         disableDefaultUI: true,
         zoom: 9,
       });
+
+      data_layer_1 = new google.maps.Data({map: map});
+      data_layer_2 = new google.maps.Data({map: map});
 
       // Create a geoencorder that will translate location details into coordinates
       var geocoder = new google.maps.Geocoder();
@@ -75,12 +80,16 @@
     // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
     function getFilter(filtOP, map, dataMarkers) {
       if (filtOP == "urm") {
-      setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
+        data_layer_1.loadGeoJson('https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
+
+      //setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson');
       // Add a marker clusterer to manage the markers.
       } else if (filtOP == "tier1") {
+        data_layer_2.loadGeoJson('https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
+        data_layer_2.setStyle({icon: 'http://maps.google.com/mapfiles/kml/paddle/ltblu-circle.png'});
         setData(map, 'https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson');
-      } else if (filtOP == "medCent") {
-
+      } else if (filtOP == "eqcn") {
+        setData(map, 'https://opendata.arcgis.com/datasets/6e6185533d5447deb8b7204c27e1858e_92.geojson');
       }
     }
 
@@ -93,12 +102,13 @@
           dataMarkers = markers;
         }
 
-        google.maps.event.addDomListener(document.getElementById('clear'), 'click', function(data) {
-          // Setup event handler to remove GeoJSON features
+        google.maps.event.addDomListener(document.getElementById('clear'), 'click', function() {
           for (var i = 0; i < dataMarkers.length; i++)
-            map.data.remove(dataMarkers[i]);
+            map.data_layer_2.remove(dataMarkers[i]);
         });
+
       });
+
     }
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">
