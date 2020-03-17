@@ -1,3 +1,5 @@
 language: node_js
 script: npm test --prefix peru
-install: npm install --prefix peru
+install:
+    - cd peru
+    - npm install
