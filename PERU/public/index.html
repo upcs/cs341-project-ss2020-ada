@@ -18,22 +18,22 @@
                 <button style="width:33.3%" value="news.html" onclick="change_page(value)">News</button>
                 <button id="loginButton" style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
-        <div id="info">
-        <div id="mySidepanel" class="sidepanel">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <input id ="filters" type="radio" name="select2" value="urm" /><span>Unreinforced Masonry Buildings</span><br />
-        <input id ="filters" type="radio" name="select2" value="tier1" /><span>Tier One Critical Facilities</span><br />
-            <input id ="filters" type="radio" name="select2" value="link3" /><span>Medical Centers</span><br />
-            <input id="submit" type="submit" value="Apply"><br>
-            <p>Descriptions:<br>
-            Unreinforced Masonry Buildings:<br>
-            Tier One Critical Facilities:<br>
-            Medical Centers:</p>
+        <div class="info">
+            <div>
+                <button class="openbtn" onclick="openNav()">&#9776; Filters</button>
             </div>
-
-          <button class="openbtn" onclick="openNav()">&#9776; Filters</button>
-    </div>
-        <!--Form for saving a location to your account-->
+            <div id="mySidepanel" class="sidepanel">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <input id ="filters" type="radio" name="select2" value="urm" /><span>Unreinforced Masonry Buildings</span><br />
+                    <input id ="filters" type="radio" name="select2" value="tier1" /><span>Tier One Critical Facilities</span><br />
+                    <input id ="filters" type="radio" name="select2" value="link3" /><span>Medical Centers</span><br />
+                    <input id="submit" type="submit" value="Apply">
+                    <p id="descriptions">DESCRIPTIONS: <br>
+                    Unreinforced Masonry Buildings: Buildings that have structural components that are not braced by reinforcing material<br><br>
+                    Tier One Critical Facilites: Buildings of upmost importance in a post-disaster situation<br><br>
+                    Medical Centers: Centers that will be able to provide you medical help</p>
+            </div>  
+    <!--Form for saving a location to your account-->
         <div class="location-grp">
             <form>
                     <fieldset>
@@ -49,9 +49,10 @@
                                     <option value="orange">Orange</option>
                             </select>
                             <input id="submitButton" type="button" value="Save">
-                          </fieldset>
-
+                        </fieldset>
+                        
             </form>
+
         </div>
     </div>
             

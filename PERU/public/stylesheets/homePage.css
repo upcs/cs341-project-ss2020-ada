@@ -38,8 +38,8 @@ h1 {
 
 .info fieldset{
    font-size: 10px;
-   width: 100px;
-   height: 100px;
+   width: 400px;
+   height: 60px;
    margin: left;
 }
 .info .sidepanel {
@@ -98,7 +98,10 @@ h1 {
 .info .openbtn:hover {
   background-color: lightblue;
 }
-
+#descriptions {
+  font-size: 10px;
+  color: darkblue;
+}
 #aboutUs {
   position: relative;
   bottom: 0%;
