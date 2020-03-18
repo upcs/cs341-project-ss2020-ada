@@ -79,7 +79,21 @@
             position: results[0].geometry.location,
             icon: markerColor[selectedColor].icon
           });
-          //post request
+          var lat = marker.position.lat
+          var long = marker.position.lng
+          var name = document.getElementById('name').value;
+          var user = document.getElementById('loginButton').innerHTML
+          $.post("/",{
+          usrname: user,
+          loc1name: name,
+          loc1x: lat,
+          loc1y: long,
+          loc2name: 0,
+          loc2x: 0,
+          loc2y: 0 ,},
+          function(status){
+            console.log(staus);
+          });
           userMarkers.push(marker);
         } else {
           alert('Address could not be found, please try again.');
