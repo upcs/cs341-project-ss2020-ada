@@ -25,9 +25,10 @@
             <div id="mySidepanel" class="sidepanel">
                     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                     <input id ="filters" type="radio" name="select2" value="urm" /><span>Unreinforced Masonry Buildings</span><br />
-                    <input id ="filters" type="radio" name="select2" value="tier1" /><span>Tier One Critical Facilities</span><br />
-                    <input id ="filters" type="radio" name="select2" value="link3" /><span>Medical Centers</span><br />
-                    <input id="submit" type="submit" value="Apply">
+	                  <input id ="filters" type="radio" name="select2" value="tier1" /><span>Tier One Critical Facilities</span><br />
+                    <input id ="filters" type="radio" name="select2" value="eqcn" /><span>Earthquake Communication Nodes</span><br />
+                    <input id="apply" type="submit" value="Apply">
+                    <input id="clear" type="submit" value="Clear">
                     <p id="descriptions">DESCRIPTIONS: <br>
                     Unreinforced Masonry Buildings: Buildings that have structural components that are not braced by reinforcing material<br><br>
                     Tier One Critical Facilites: Buildings of upmost importance in a post-disaster situation<br><br>
@@ -42,8 +43,8 @@
                             <input id="addressID" type="textbox" name="address" value="">
                             Name:
                             <input type="text" name="Name" value=""><br>
-                            <select>
-                                    <option value="red" onclick="">Red</option>
+                            <select id="colorSet">
+                                    <option value="red">Red</option>
                                     <option value="blue">Blue</option>
                                     <option value="green">Green</option>
                                     <option value="orange">Orange</option>
@@ -52,7 +53,6 @@
                         </fieldset>
                         
             </form>
-
         </div>
     </div>
             
