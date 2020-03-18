@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-            <link rel="stylesheet" href="./stylesheets/news.css">
+      <link rel="stylesheet" href="./stylesheets/news.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"/></script>
     </head>
     <body>
         <div id="header">
@@ -11,7 +12,7 @@
         <div class="btn-group" style="width:100%">
                 <button style="width:33.3%" value="index.html" onclick="change_page(value)">Home</button>
                 <button style="width:33.3%" value="news.html" onclick="change_page(value)">News</button>
-                <button style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
+                <button id="loginButton" style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
 
         <div id="news">News</div> 
@@ -58,8 +59,7 @@
             <p> An earthquake is a sudden and rapid shaking of the ground
                caused by the shifting of rocks deep underneath the earth's surface. 
                Earthquakes can happen without warning and result in injuries and 
-               damage to property and roads. Earthquakes can 
-               cause fires, tsunamis, landslides, or avalanches.
+               damage to property and roads.
             </p>
           </blockquote>
           <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
