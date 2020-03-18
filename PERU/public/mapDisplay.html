@@ -82,7 +82,7 @@
           var lat = marker.position.lat
           var long = marker.position.lng
           var name = document.getElementById('name').value;
-          var user = document.getElementById('loginButton').innerHTML
+          var user = localStorage.getItem("whoami");
           $.post("/",{
           usrname: user,
           loc1name: name,

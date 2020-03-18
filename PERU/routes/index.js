@@ -11,14 +11,14 @@ router.post('/', function(req, res, next) {
   console.log(req.body);
 
   //getting the user from the post 
-  var insert_str = "INSERT INTO peru_users VALUES ('"
+  var insert_str = "INSERT INTO peru_users (loc1name, loc1x, loc1y,loc2name, loc2x,loc2y) VALUES ('" +
                 loc1name 
                 +"', '"+ loc1x 
                 +"', '"+ loc1y 
                 +"', '"+ loc2name 
                 +"', '"+ loc2x
                 +"', '"+ loc2y
-                +"')  WHERE username='"+usrname +"';"
+                +"')  WHERE username='"+ usrname +"';"
 
     console.log(insert_str);
     dbms.dbquery(insert_str,
