@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var dbms = require("./dbms.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -9,16 +10,23 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   console.log("req body");
   console.log(req.body);
-
+  var usrname =  req.body.usrname,
+        loc1name  = req.body.loc1name,
+        loc1x = req.body.loc1x,
+        loc1y = req.body.loc1y,
+        loc2name  = req.body.loc2name,
+        loc2x = req.body.loc2x,
+        loc2y = req.body.loc2y
+        
   //getting the user from the post 
-  var insert_str = "INSERT INTO peru_users (loc1name, loc1x, loc1y,loc2name, loc2x,loc2y) VALUES ('" +
+  var insert_str = "UPDATE peru_users SET loc1_name = '" +
                 loc1name 
-                +"', '"+ loc1x 
-                +"', '"+ loc1y 
-                +"', '"+ loc2name 
-                +"', '"+ loc2x
-                +"', '"+ loc2y
-                +"')  WHERE username='"+ usrname +"';"
+                +"', loc1x = '"+ loc1x 
+                +"', loc1y = '"+ loc1y 
+                +"', loc2_name = '"+ loc2name 
+                +"', loc2x = '"+ loc2x
+                +"', loc2y = '"+ loc2y
+                + "' WHERE username='"+ usrname +"';"
 
     console.log(insert_str);
     dbms.dbquery(insert_str,
