@@ -1,7 +1,10 @@
 language: node_js
 node_js:
     - "12.14.1"
-script: npm test
+script:
+    - npm test
+    - codecov
 install:
     - cd PERU
     - npm install
+    - npm install -g codecov
