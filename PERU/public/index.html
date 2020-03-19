@@ -18,47 +18,45 @@
                 <button style="width:33.3%" value="news.html" onclick="change_page(value)">News</button>
                 <button id="loginButton" style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
-        
         <div class="info">
-                <div>
-                    <button class="openbtn" onclick="openNav()">&#9776; Filters</button>
-                </div>
-                <div id="mySidepanel" class="sidepanel">
-                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <input id ="filters" type="radio" name="select2" value="urm" /><span>Unreinforced Masonry Buildings</span><br />
-                        <input id ="filters" type="radio" name="select2" value="tier1" /><span>Tier One Critical Facilities</span><br />
-                        <input id ="filters" type="radio" name="select2" value="link3" /><span>Medical Centers</span><br />
-                        <input id="submit" type="submit" value="Apply">
-                </div>  
-        <!--Form for saving a location to your account-->
-            <div class="location-grp">
-                <form>
-                        <fieldset>
-                                <legend>Location information:</legend>
-                                Street Address:
-                                <input id="addressID" type="textbox" name="address" value="">
-                                Name:
-                                <input type="text" name="Name" value=""><br>
-                                <select>
-                                        <option value="red" onclick="">Red</option>
-                                        <option value="blue">Blue</option>
-                                        <option value="green">Green</option>
-                                        <option value="orange">Orange</option>
-                                </select>
-                                <input id="submitButton" type="button" value="Save">
-                            </fieldset>
-                            
-                </form>
-
+            <div>
+                <button class="openbtn" onclick="openNav()">&#9776; Filters</button>
             </div>
+            <div id="mySidepanel" class="sidepanel">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <input id ="filters" type="radio" name="select2" value="urm" /><span>Unreinforced Masonry Buildings</span><br />
+	                  <input id ="filters" type="radio" name="select2" value="tier1" /><span>Tier One Critical Facilities</span><br />
+                    <input id ="filters" type="radio" name="select2" value="eqcn" /><span>Earthquake Communication Nodes</span><br />
+                    <input id="apply" type="submit" value="Apply">
+                    <input id="clear" type="submit" value="Clear">
+                    <p id="descriptions">DESCRIPTIONS: <br>
+                    Unreinforced Masonry Buildings: Buildings that have structural components that are not braced by reinforcing material<br><br>
+                    Tier One Critical Facilites: Buildings of upmost importance in a post-disaster situation<br><br>
+                    Communication Nodes: Buildings that have certain procedures in place in case of an earthquake</p>
+            </div>  
+    <!--Form for saving a location to your account-->
+        <div class="location-grp">
+            <form>
+                    <fieldset>
+                            <legend>Location information:</legend>
+                            Street Address:
+                            <input id="addressID" type="textbox" name="address" value="">
+                            Name:
+                            <input type="text" name="Name" id="name" value=""><br>
+                            <select id="colorSet">
+                                    <option value="red">Red</option>
+                                    <option value="blue">Blue</option>
+                                    <option value="green">Green</option>
+                                    <option value="orange">Orange</option>
+                            </select>
+                            <input id="submitButton" type="button" value="Save">
+                        </fieldset>
+                        
+            </form>
         </div>
-          
-           
-        
-               
-            <div class="inner" id="mapContent" style=" padding-top: 10px; padding-bottom: 10px; width:900px; height:700px;">Included Data</div>
+    </div>
             
-  
+        <div class="inner" id="mapContent" style=" padding-top: 10px; padding-bottom: 10px; width:100%; height:600px;">Included Data</div>
         <!--About us button which will take you to about us page-->
         <button id="aboutUs" value="aboutUs.html" onclick="change_page(value)">About Us</button>
 
