@@ -35,19 +35,16 @@ h1 {
 .btn-group button:hover {
   background-color: lightblue;
 }
-.info{
-  height: auto;
-  width:100%;
-}
+
 .info fieldset{
    font-size: 10px;
    width: 500px;
-   height: 55px;
+   height: 60px;
+   margin: left;
 }
-
- .info .sidepanel {
-  margin-top: 275px;
-  height: 300px; /* Specify a height */
+.info .sidepanel {
+  margin-top: 265px;
+  height: 250px; /* Specify a height */
   width: 0; /* 0 width - change this with JavaScript */
   position: absolute; /* Stay in place */
   z-index: 2; /* Stay on top */
@@ -98,10 +95,13 @@ h1 {
 #filters{
   color: white;
 }
- .info .openbtn:hover {
+.info .openbtn:hover {
   background-color: lightblue;
-} 
-
+}
+#descriptions {
+  font-size: 10px;
+  color: darkblue;
+}
 #aboutUs {
   position: relative;
   bottom: 0%;
@@ -123,5 +123,4 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    height:auto;
 }
