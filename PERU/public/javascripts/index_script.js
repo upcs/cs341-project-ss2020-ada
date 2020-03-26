@@ -11,6 +11,7 @@ window.onload = function(){
     console.log(windowWhoAmI);
     currButtonText = windowWhoAmI + "  logged in. Click to logout.";
     document.getElementById('loginButton').innerHTML = currButtonText;
+    update_user_location_data();
   }
 }
 
@@ -20,3 +21,24 @@ function change_page(value) {
 function openNav(){document.getElementById("mySidepanel").style.width = "250px";}
 function closeNav() {document.getElementById("mySidepanel").style.width = "0";}
 module.exports = {openNav, closeNav}
+
+
+function update_user_location_data(){
+  var loc1_name = localStorage.getItem("loc1_name");
+  var loc1_x = localStorage.getItem("loc1_x");
+  var loc1_y = localStorage.getItem('loc1_y');
+  var loc2_name = localStorage.getItem("loc2_name");
+  var loc2_x = localStorage.getItem('loc2_x');
+  var loc2_y = localStorage.getItem('loc2_y');
+
+  if(loc1_name == '0'){
+    $('.userloc1').html("No location selected.");
+  }
+  else{$('.userloc1').html("User location 1: " + loc1_name);
+  }
+  if(loc2_name == '0'){
+    $('.userloc2').html("No location selected.");
+  }
+  else{$('.userloc2').html("User location 2: " + loc2_name);
+  }
+}

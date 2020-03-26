@@ -18,8 +18,15 @@ $(document).ready(function(){
         for (var i = 0; i<data.length; i++){
           if(data[i].Username == user && data[i].password == pass){
             console.log("user found");
+            console.log(data[i]);
             var found = "true";
             localStorage.setItem("whoami",user);
+            localStorage.setItem("loc1_name", data[i].loc1_name);
+            localStorage.setItem("loc2_name",data[i].loc2_name);
+            localStorage.setItem("loc1x",data[i].loc1x);
+            localStorage.setItem("loc1y",data[i].loc1y);
+            localStorage.setItem("loc2x",data[i].loc2x);
+            localStorage.setItem("loc2y",data[i].loc2y);
           }
         }
         if(found == "true"){
@@ -46,3 +53,4 @@ function return_home() {
 function changePage() {
   window.location.href = "sign-up.html";
 }
+
