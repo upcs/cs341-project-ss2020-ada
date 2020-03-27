@@ -19,7 +19,7 @@
                 <button id="loginButton" style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
         <div class="info">
-            <div>
+            <div class="openbutton">
                 <button class="openbtn" onclick="openNav()">&#9776; Filters</button>
             </div>
             <div id="mySidepanel" class="sidepanel">
@@ -37,7 +37,7 @@
     <!--Form for saving a location to your account-->
         <div class="location-grp">
             <form>
-                    <fieldset>
+                    <fieldset class="location">
                             <legend>Location information:</legend>
                             Street Address:
                             <input id="addressID" type="textbox" name="address" value="">
@@ -52,6 +52,8 @@
                             <input id="submitButton" type="button" value="Save">
                         </fieldset> 
             </form>
+        </div>
+        <div class="savedLocations">
             <fieldset class="saved_user_locations">
                 <legend>Manage Saved User Locations</legend>
                 <!-- <h3>User location 1: </h3> -->
@@ -59,7 +61,6 @@
                 <h3 class="userloc2"></h3>
             </fieldset>
         </div>
-        
     </div>
             
         <div class="inner" id="mapContent" style=" padding-top: 10px; padding-bottom: 10px; width:100%; height:600px;">Included Data</div>
