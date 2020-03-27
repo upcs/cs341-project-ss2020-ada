@@ -31,12 +31,12 @@ function update_user_location_data(){
   var loc2_x = localStorage.getItem('loc2_x');
   var loc2_y = localStorage.getItem('loc2_y');
 
-  if(loc1_name == '0'){
+  if(loc1_name == '0' || loc1_name == null){
     $('.userloc1').html("No location selected.");
   }
   else{$('.userloc1').html("User location 1: " + loc1_name);
   }
-  if(loc2_name == '0'){
+  if(loc2_name == '0' || loc2_name == null){
     $('.userloc2').html("No location selected.");
   }
   else{$('.userloc2').html("User location 2: " + loc2_name);
