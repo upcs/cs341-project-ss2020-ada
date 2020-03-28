@@ -12,7 +12,9 @@ h1 {
   color: white;
   font-style: italic;
 }
-
+h3 {
+  font-size: 10px;
+}
 .btn-group button {
   background-color: blue; /* blue background */
   border: 1px solid white; /* white border */
@@ -47,7 +49,7 @@ h1 {
 .info .location{
    font-size: 10px;
    /*width: 40%;*/
-   height: 60px;
+   height: 70px;
   
 }
 .info .openbutton{
@@ -61,7 +63,7 @@ h1 {
 .info .saved_user_locations{
   font-size: 10px;
   width: 100%;
-  height: 60px;
+  height: 70px;
   
 }
 .info .sidepanel {
@@ -146,4 +148,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+}
+#HideShowButton {
+    font-size: 10px;
 }
