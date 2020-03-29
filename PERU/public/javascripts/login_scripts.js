@@ -9,6 +9,12 @@ $(document).ready(function(){
     if(windowWhoAmI != 'null'){
       alert("You are now logged out");
       localStorage.setItem("whoami",'null');
+      localStorage.setItem("loc1_name", '0');
+      localStorage.setItem("loc2_name", '0');
+      localStorage.setItem("loc1x", '0');
+      localStorage.setItem("loc1y", '0');
+      localStorage.setItem("loc2x", '0');
+      localStorage.setItem("loc2y", '0');
       return_home();
     }
     else{

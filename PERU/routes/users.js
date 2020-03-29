@@ -40,7 +40,7 @@ function queryData(data, res){
          loc1y: data[i].loc1y,
          loc1_name: data[i].loc1_name,
          loc2x: data[i].loc2x,
-         loc2y: data[i].loc1y,
+         loc2y: data[i].loc2y,
          loc2_name: data[i].loc2_name});
     }
   

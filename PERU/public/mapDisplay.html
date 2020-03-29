@@ -83,7 +83,64 @@
           var long = marker.position.lng
           var name = document.getElementById('name').value;
           var user = localStorage.getItem("whoami");
-          $.post("/",{
+          //SAM CODE START
+          // if the use has a location in cookies (loaded on signin), any additional location saves
+          // will be in the second location slot. 
+          if(localStorage.getItem("loc1_name")=='0' || localStorage.getItem("loc1_name") == null){
+            /* Updating local cookies as soon as the user presses the save button
+              is what I'm trying to do here (as well as in the other else if case).
+              This method does not work, it puts the function in the cookie instead of the value.
+              Any fixes?
+            */
+            // localStorage.setItem("loc1_name", name);
+            // localStorage.setItem("loc1x", lat);
+            // localStorage.setItem("loc1y", long);
+            console.log("LAT AND LONG: ")
+            console.log(lat);
+            console.log(long);
+            $.post("/",{
+            usrname: user,
+            loc1name: name,
+            loc1x: lat,
+            loc1y: long,
+            loc2name: 0,
+            loc2x: 0,
+            loc2y: 0 ,},
+            function(status){
+              console.log(staus);
+            });
+            userMarkers.push(marker);
+          }
+          //second location slot storage case
+          else if((localStorage.getItem("loc2_name")=='0' || localStorage.getItem("loc2_name") == null) 
+              && (localStorage.getItem("loc1_name")!='0' || localStorage.getItem("loc1_name") != null)){
+            var loc1name = localStorage.getItem("loc1_name"),
+                loc1x = localStorage.getItem("loc1x"),
+                loc1y = localStorage.getItem("loc1y");
+            // localStorage.setItem("loc2_name", name);
+            // localStorage.setItem("loc2x", lat);
+            // localStorage.setItem("loc2y", long);
+            console.log("LAT AND LONG: ")
+            console.log(lat);
+            console.log(long);
+            $.post("/",{
+            usrname: user,
+            loc1name: loc1name,
+            loc1x: loc1x,
+            loc1y: loc1y,
+            loc2name: name,
+            loc2x: lat,
+            loc2y: long,},
+            function(status){
+              console.log(staus);
+            });
+            userMarkers.push(marker);
+          }
+          //SAM CODE END
+
+
+          // BEN CODE START
+          /*$.post("/",{
           usrname: user,
           loc1name: name,
           loc1x: lat,
@@ -94,10 +151,10 @@
           function(status){
             console.log(staus);
           });
-          userMarkers.push(marker);
+          userMarkers.push(marker);*/
         } else {
           alert('Address could not be found, please try again.');
-        }
+        } //BEN CODE END
       });
     }
 
@@ -113,7 +170,6 @@
         setData(map, 'https://opendata.arcgis.com/datasets/6e6185533d5447deb8b7204c27e1858e_92.geojson', data_layer_3);
       }
     } // end of getFilter function
-
     function setData(map, url, data_layer) {
       $.getJSON(url, function(data) {
         markers = data_layer.addGeoJson(data);
@@ -126,9 +182,9 @@
           for (var i = 0; i < dataMarkers.length; i++)
             data_layer.remove(dataMarkers[i]);
         });
-
       });
-  }
+    }
+
     
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">

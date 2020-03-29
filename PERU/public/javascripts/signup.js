@@ -12,9 +12,8 @@ $(document).ready(function(){
       $.post("/signUp",{
          usrname: user},
          function(data){
-            //console.log(err);
-            console.log("data")
-            console.log(data);
+            //console.log("data")
+            //console.log(data);
             //var found = "false";
             for (var i = 0; i<data.length; i++){
                console.log(data[i].Username);
