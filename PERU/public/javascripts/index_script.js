@@ -20,7 +20,7 @@ function change_page(value) {
   }
 function openNav(){document.getElementById("mySidepanel").style.width = "250px";}
 function closeNav() {document.getElementById("mySidepanel").style.width = "0";}
-module.exports = {openNav, closeNav}
+module.exports = {openNav, closeNav};
 
 // updates the user location information box
 function update_user_location_data(){

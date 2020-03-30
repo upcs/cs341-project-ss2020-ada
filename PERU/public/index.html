@@ -33,7 +33,7 @@
                     Unreinforced Masonry Buildings: Buildings that have structural components that are not braced by reinforcing material<br><br>
                     Tier One Critical Facilites: Buildings of upmost importance in a post-disaster situation<br><br>
                     Communication Nodes: Buildings that have certain procedures in place in case of an earthquake</p>
-            </div>  
+            </div>
     <!--Form for saving a location to your account-->
         <div class="location-grp">
             <form>
@@ -50,25 +50,26 @@
                                     <option value="orange">Orange</option>
                             </select>
                             <input id="submitButton" type="button" value="Save">
-                        </fieldset> 
+                        </fieldset>
             </form>
         </div>
         <div class="savedLocations">
             <fieldset class="saved_user_locations">
                 <legend>Manage Saved User Locations</legend>
-                <input id="HideShowButton" type="button" value="Hide/Show">
+                <input id="HideShowButton" type="button" value="Show Data">
+                <input id="removeAll" type="button" value="Remove-Data">
                 <!-- <h3>User location 1: </h3> -->
-                <h3 class="userloc1"></h3>
+                <h3 class="userloc1"> </h3>
                 <h3 class="userloc2"></h3>
             </fieldset>
         </div>
     </div>
-            
+
         <div class="inner" id="mapContent" style=" padding-top: 10px; padding-bottom: 10px; width:100%; height:600px;">Included Data</div>
         <!--About us button which will take you to about us page-->
         <button id="aboutUs" value="aboutUs.html" onclick="change_page(value)">About Us</button>
 
     </body>
-    
+
       <script src="./javascripts/index_script.js"></script>
 </html>

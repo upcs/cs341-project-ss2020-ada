@@ -17,11 +17,13 @@
 <body>
   <div id="map"></div>
   <script>
+    var map;
     var data_layer_1;
     var data_layer_2;
     var data_layer_3;
     var dataMarkers = [];
     var userMarkers = [];
+    var userToggle = 0;
     var PORTLAND_OREGON_BOUNDS = {
       north: 45.9140699,
       south: 45.0140702,
@@ -32,9 +34,15 @@
       lat: 45.51407,
       lng: -122.7057
     };
+    var markerColor = {
+       orange: { icon: 'http://maps.google.com/mapfiles/kml/paddle/orange-circle.png' },
+       red: { icon: 'http://maps.google.com/mapfiles/kml/paddle/red-circle.png' },
+       blue: { icon: 'http://maps.google.com/mapfiles/kml/paddle/ltblu-circle.png'},
+       green: { icon: 'http://maps.google.com/mapfiles/kml/paddle/grn-circle.png'}
+     };
 
     function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
+      map = new google.maps.Map(document.getElementById('map'), {
         center: UNIVPORT,
         restriction: {
           latLngBounds: PORTLAND_OREGON_BOUNDS,
@@ -60,15 +68,64 @@
         var filterSelect = document.querySelector('input[name = "select2"]:checked').value;
         getFilter(filterSelect, map, dataMarkers);
       });
+
+      document.getElementById('HideShowButton').addEventListener('click', function() {
+          loadUserData();
+      });
+
+      document.getElementById('removeAll').addEventListener('click', function() {
+          removeUserData();
+      });
+
     } // Close of Initialize Map function
 
-    function geocodeAddress(geocoder, resultsMap, selectedColor) {
-      var markerColor = {
-        orange: { icon: 'http://maps.google.com/mapfiles/kml/paddle/orange-circle.png' },
-        red: { icon: 'http://maps.google.com/mapfiles/kml/paddle/red-circle.png' },
-        blue: { icon: 'http://maps.google.com/mapfiles/kml/paddle/ltblu-circle.png'},
-        green: { icon: 'http://maps.google.com/mapfiles/kml/paddle/grn-circle.png'}
+
+    function removeUserData(){
+      for (var i = 0; i < dataMarkers.length; i++)
+        map.remove(dataMarkers[i]);
+
+    localStorage.setItem("loc1x", 0);
+    localStorage.setItem("loc1y", 0);
+    localStorage.setItem("loc1_name", '0');
+    localStorage.setItem("loc2x", 0);
+    localStorage.setItem("loc2y", 0);
+    localStorage.setItem("loc2_name", '0');
+    }
+
+    // Load user data on page startup
+    function loadUserData(){
+      if(localStorage.getItem("loc1_name")=='0' || localStorage.getItem("loc1_name") == null){
+      } else {
+        var locLat = parseFloat(localStorage.getItem("loc1x"));
+        var locLng = parseFloat(localStorage.getItem("loc1y"));
+        var location = {
+          lat: locLat,
+          lng: locLng
+        };
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        userMarkers.push(marker);
       }
+
+      if(localStorage.getItem("loc2_name")=='0' || localStorage.getItem("loc2_name") == null){
+      } else {
+        var locLat = parseFloat(localStorage.getItem("loc2x"));
+        var locLng = parseFloat(localStorage.getItem("loc2y"));
+        var location = {
+          lat: locLat,
+          lng: locLng
+        };
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        });
+        userMarkers.push(marker);
+      }
+    }
+
+    function geocodeAddress(geocoder, resultsMap, selectedColor) {
       var address = document.getElementById('addressID').value;
       geocoder.geocode({
         'address': address
@@ -85,7 +142,7 @@
           var user = localStorage.getItem("whoami");
           //SAM CODE START
           // if the use has a location in cookies (loaded on signin), any additional location saves
-          // will be in the second location slot. 
+          // will be in the second location slot.
           if(localStorage.getItem("loc1_name")=='0' || localStorage.getItem("loc1_name") == null){
             /* Updating local cookies as soon as the user presses the save button
               is what I'm trying to do here (as well as in the other else if case).
@@ -112,8 +169,8 @@
             userMarkers.push(marker);
           }
           //second location slot storage case
-          else if((localStorage.getItem("loc2_name")=='0' || localStorage.getItem("loc2_name") == null) 
-              && (localStorage.getItem("loc1_name")!='0' || localStorage.getItem("loc1_name") != null)){
+          else if((localStorage.getItem("loc2_name")=='0' || localStorage.getItem("loc2_name") == null)
+              && (localStorage.getItem("loc1_name") !='0' || localStorage.getItem("loc1_name") != null)){
             var loc1name = localStorage.getItem("loc1_name"),
                 loc1x = localStorage.getItem("loc1x"),
                 loc1y = localStorage.getItem("loc1y");
@@ -135,6 +192,8 @@
               console.log(staus);
             });
             userMarkers.push(marker);
+          } else {
+            alert("Max user points stored, please remove a point not in use.");
           }
           //SAM CODE END
 
@@ -185,7 +244,7 @@
       });
     }
 
-    
+
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">
   </script>
