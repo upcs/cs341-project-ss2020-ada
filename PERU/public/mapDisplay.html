@@ -69,8 +69,16 @@
         getFilter(filterSelect, map, dataMarkers);
       });
 
+      var showHide = 0;
+      loadUserData();
       document.getElementById('HideShowButton').addEventListener('click', function() {
-          loadUserData();
+        if(showHide == 0){
+          hideData();
+          showHide = 1;
+        } else {
+          showData();
+          showHide = 0;
+        }
       });
 
       document.getElementById('removeAll').addEventListener('click', function() {
@@ -79,12 +87,22 @@
 
     } // Close of Initialize Map function
 
+    // Hide user data points from the map
+    function hideData(){
+      for (var i = 0; i < userMarkers.length; i++)
+          userMarkers[i].setMap(null);
+    }
+
+    // Show user data points on the map
+    function showData(){
+      for (var i = 0; i < userMarkers.length; i++)
+          userMarkers[i].setMap(map);
+    }
 
     function removeUserData(){
 
       // Remove the data points from the map
-      for (var i = 0; i < userMarkers.length; i++)
-          userMarkers[i].setMap(null);
+      hideData();
       // empty the userMarkers array
       userMarkers = [];
 
@@ -154,7 +172,7 @@
         } else {
           rngColor = "orange";
         }
-        
+
         var marker = new google.maps.Marker({
           position: location,
           map: map,
