@@ -81,8 +81,12 @@
 
 
     function removeUserData(){
-      for (var i = 0; i < dataMarkers.length; i++)
-        map.remove(dataMarkers[i]);
+
+      // Remove the data points from the map
+      for (var i = 0; i < userMarkers.length; i++)
+          userMarkers[i].setMap(null);
+      // empty the userMarkers array
+      userMarkers = [];
 
     localStorage.setItem("loc1x", 0);
     localStorage.setItem("loc1y", 0);
@@ -90,6 +94,8 @@
     localStorage.setItem("loc2x", 0);
     localStorage.setItem("loc2y", 0);
     localStorage.setItem("loc2_name", '0');
+    $('.userloc1').html("No location selected.");
+    $('.userloc2').html("No location selected.");
     }
 
     // Load user data on page startup
@@ -136,8 +142,8 @@
             position: results[0].geometry.location,
             icon: markerColor[selectedColor].icon
           });
-          var lat = marker.position.lat
-          var long = marker.position.lng
+          var lat = parseFloat(marker.position.lat());
+          var long = parseFloat(marker.position.lng());
           var name = document.getElementById('name').value;
           var user = localStorage.getItem("whoami");
           //SAM CODE START
@@ -149,9 +155,9 @@
               This method does not work, it puts the function in the cookie instead of the value.
               Any fixes?
             */
-            // localStorage.setItem("loc1_name", name);
-            // localStorage.setItem("loc1x", lat);
-            // localStorage.setItem("loc1y", long);
+            localStorage.setItem("loc1_name", name);
+            localStorage.setItem("loc1x", lat);
+            localStorage.setItem("loc1y", long);
             console.log("LAT AND LONG: ")
             console.log(lat);
             console.log(long);
@@ -160,31 +166,35 @@
             loc1name: name,
             loc1x: lat,
             loc1y: long,
-            loc2name: 0,
-            loc2x: 0,
-            loc2y: 0 ,},
+            loc2name: localStorage.getItem("loc2_name"),
+            loc2x: parseFloat(localStorage.getItem("loc2x")),
+            loc2y: parseFloat(localStorage.getItem("loc2y")),
+            },
             function(status){
-              console.log(staus);
+              console.log(status);
             });
             userMarkers.push(marker);
+            $('.userloc1').html("User location 1: " + name);
           }
           //second location slot storage case
           else if((localStorage.getItem("loc2_name")=='0' || localStorage.getItem("loc2_name") == null)
               && (localStorage.getItem("loc1_name") !='0' || localStorage.getItem("loc1_name") != null)){
-            var loc1name = localStorage.getItem("loc1_name"),
-                loc1x = localStorage.getItem("loc1x"),
-                loc1y = localStorage.getItem("loc1y");
-            // localStorage.setItem("loc2_name", name);
-            // localStorage.setItem("loc2x", lat);
-            // localStorage.setItem("loc2y", long);
+
+            var local_1_name = localStorage.getItem("loc1_name");
+            var local_1x = parseFloat(localStorage.getItem("loc1x"));
+            var local_1y = parseFloat(localStorage.getItem("loc1y"));
+
+            localStorage.setItem("loc2_name", name);
+            localStorage.setItem("loc2x", lat);
+            localStorage.setItem("loc2y", long);
             console.log("LAT AND LONG: ")
             console.log(lat);
             console.log(long);
             $.post("/",{
             usrname: user,
-            loc1name: loc1name,
-            loc1x: loc1x,
-            loc1y: loc1y,
+            loc1name: localStorage.getItem("loc1_name"),
+            loc1x: parseFloat(localStorage.getItem("loc1x")),
+            loc1y: parseFloat(localStorage.getItem("loc1y")),
             loc2name: name,
             loc2x: lat,
             loc2y: long,},
@@ -192,6 +202,7 @@
               console.log(staus);
             });
             userMarkers.push(marker);
+            $('.userloc2').html("User location 2: " + name);
           } else {
             alert("Max user points stored, please remove a point not in use.");
           }
