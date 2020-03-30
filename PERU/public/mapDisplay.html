@@ -100,6 +100,7 @@
 
     // Load user data on page startup
     function loadUserData(){
+
       if(localStorage.getItem("loc1_name")=='0' || localStorage.getItem("loc1_name") == null){
       } else {
         var locLat = parseFloat(localStorage.getItem("loc1x"));
@@ -108,9 +109,25 @@
           lat: locLat,
           lng: locLng
         };
+
+        // Ratchet random color selector
+        // had to get around the string-based dictionary
+        var rngNum = getRandomInt(0, 3);
+        var rngColor;
+        if(rngNum == 0){
+          rngColor = "red";
+        } else if (rngNum == 1){
+          rngColor = "blue";
+        } else if (rngNum == 2){
+          rngColor = "green";
+        } else {
+          rngColor = "orange";
+        }
+
         var marker = new google.maps.Marker({
           position: location,
-          map: map
+          map: map,
+          icon: markerColor[rngColor].icon
         });
         userMarkers.push(marker);
       }
@@ -123,9 +140,25 @@
           lat: locLat,
           lng: locLng
         };
+
+        // Ratchet random color selector
+        // had to get around the string-based dictionary
+        var rngNum = getRandomInt(0, 3);
+        var rngColor;
+        if(rngNum == 0){
+          rngColor = "red";
+        } else if (rngNum == 1){
+          rngColor = "blue";
+        } else if (rngNum == 2){
+          rngColor = "green";
+        } else {
+          rngColor = "orange";
+        }
+        
         var marker = new google.maps.Marker({
           position: location,
-          map: map
+          map: map,
+          icon: markerColor[rngColor].icon
         });
         userMarkers.push(marker);
       }
@@ -226,6 +259,13 @@
           alert('Address could not be found, please try again.');
         } //BEN CODE END
       });
+    }
+
+    // Function to support random color select
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 
     // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
