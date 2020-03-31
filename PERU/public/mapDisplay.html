@@ -114,6 +114,19 @@
     localStorage.setItem("loc2_name", '0');
     $('.userloc1').html("No location selected.");
     $('.userloc2').html("No location selected.");
+
+    $.post("/",{
+    usrname: localStorage.getItem("whoami"),
+    loc1name: '0',
+    loc1x: 0,
+    loc1y: 0,
+    loc2name: '0',
+    loc2x: 0,
+    loc2y: 0,},
+    function(status){
+      console.log(staus);
+    });
+
     }
 
     // Load user data on page startup
