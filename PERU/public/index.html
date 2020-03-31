@@ -3,6 +3,11 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="./stylesheets/homePage.css">
+        <script type='text/javascript'>
+            var d = new Date();
+            var starttime = d.getTime();
+            </script>
+            <div id="loadtime"></div>
     </head>
     <title> PERU - Safety First </title>
     <script> $(function(){ $("#mapContent").load("mapDisplay.html"); });
@@ -70,6 +75,11 @@
         <button id="aboutUs" value="aboutUs.html" onclick="change_page(value)">About Us</button>
 
     </body>
-
+    <script type='text/javascript'>
+        var d2 = new Date();
+        var endtime = d2.getTime();
+        var totaltime = (endtime - starttime)/1000;
+        document.getElementById("loadtime").innerHTML = 'Page loaded in: ' + totaltime +' seconds';
+        </script>
       <script src="./javascripts/index_script.js"></script>
 </html>
