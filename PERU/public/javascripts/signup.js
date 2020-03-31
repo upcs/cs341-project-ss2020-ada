@@ -8,7 +8,7 @@ $(document).ready(function(){
       var user = $('#user').val();
       var email = $('#email').val();
       var password = $('#password').val();
-      var message = "User Passwords must match the following complexity requirements:\n -> At least 8 characters long\n -> One Uppercase/Lowercase letter\n -> One digit 0-9\n -> One special character: !@#$%&amp;*()";
+      var message = "User Passwords must match the following complexity requirements:\n -> At least 8 characters long\n -> One Uppercase/Lowercase letter\n -> One digit 0-9\n -> One special character: !@#$%&*()";
       // Null Input validation
       if (user == '' || email == '' || password == '' ){
         alert("Please fill out all requested information");
