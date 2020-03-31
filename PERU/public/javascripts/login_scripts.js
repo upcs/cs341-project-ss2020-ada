@@ -36,7 +36,7 @@ $(document).ready(function(){
           }
         }
         if(found == "true"){
-            alert("you are logged in");
+            alert("Welcome Back!");
             console.log("logged in");
             return_home();
         }
@@ -45,7 +45,7 @@ $(document).ready(function(){
           console.log("wrong username or password");
           console.log(user);
           console.log(pass);
-        }   
+        }
         }, "json"
         );
     }
@@ -59,4 +59,3 @@ function return_home() {
 function changePage() {
   window.location.href = "sign-up.html";
 }
-
