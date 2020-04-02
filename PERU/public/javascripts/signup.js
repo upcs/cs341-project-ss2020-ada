@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
 
    $('.btn').click(function(event){
@@ -40,7 +38,6 @@ $(document).ready(function(){
        }
    });
 });
-
 // Code for password-complexity requirements verification taken from...
 // External Citation: http://javaonlineguide.net/2014/09/javascript-code-to-check-password-complexity.html
 
@@ -85,4 +82,6 @@ function check(email){
 function back2_login() {
    window.location.href = "loginPage.html";
  }
-module.exports = check;
+ 
+ 
+module.exports = {check, insertNewUser, isStrongPwd1}

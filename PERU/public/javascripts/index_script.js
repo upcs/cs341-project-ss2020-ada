@@ -20,7 +20,6 @@ function change_page(value) {
   }
 function openNav(){document.getElementById("mySidepanel").style.width = "250px";}
 function closeNav() {document.getElementById("mySidepanel").style.width = "0";}
-module.exports = {openNav, closeNav};
 
 // updates the user location information box
 function update_user_location_data(){
@@ -42,5 +41,4 @@ function update_user_location_data(){
   else{$('.userloc2').html("User location 2: " + loc2_name);
   }
 }
-
-module.exports.update_user_location_data = update_user_location_data();
+module.exports = {openNav, closeNav, update_user_location_data};

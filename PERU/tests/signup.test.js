@@ -1,23 +1,32 @@
 var $ = require('../node_modules/jquery');
 window.$ = $;
-var check = require('../public/javascripts/signup');
-
-
-
-
+var methods = require('../public/javascripts/signup');
 
 test('valid email', () => {
-  expect(check('harrah20@up.edu')).toBeTruthy();
+  expect(methods.check('harrah20@up.edu')).toBeTruthy();
 });
 
 test('invalid email', () => {
-  expect(check('harrah20@up')).toBeFalsy();
+  expect(methods.check('harrah20@up')).toBeFalsy();
 });
 
 test('valid email', () => {
-  expect(check('ab@gmail.com')).toBeTruthy();
+  expect(methods.check('ab@gmail.com')).toBeTruthy();
 });
 
 test('invalid email', () => {
-  expect(check('1234@gmail')).toBeFalsy();
+  expect(methods.check('1234@gmail')).toBeFalsy();
+});
+
+test('weak password', () => {
+  expect(methods.isStrongPwd1('1234')).toBeFalsy();
+});
+
+test('strong password', () => {
+  expect(methods.isStrongPwd1('Abcd1234!@#$')).toBeTruthy();
+});
+
+test('insert a new user', () => {
+  methods.insertNewUser("harrah20","harrah20@up.edu","Abcd1234*");
+  expect("").toBe("");
 });
