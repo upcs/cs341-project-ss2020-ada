@@ -3,6 +3,11 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="./stylesheets/homePage.css">
+        <script type='text/javascript'>
+            var d = new Date();
+            var starttime = d.getTime();
+            </script>
+            <div id="loadtime"></div>
     </head>
     <title> PERU - Safety First </title>
     <script> $(function(){ $("#mapContent").load("mapDisplay.html"); });
@@ -19,7 +24,7 @@
                 <button id="loginButton" style="width:33.3%" value="loginPage.html" onclick="change_page(value)">Log-In</button>
         </div>
         <div class="info">
-            <div>
+            <div class="openbutton">
                 <button class="openbtn" onclick="openNav()">&#9776; Filters</button>
             </div>
             <div id="mySidepanel" class="sidepanel">
@@ -33,11 +38,11 @@
                     Unreinforced Masonry Buildings: Buildings that have structural components that are not braced by reinforcing material<br><br>
                     Tier One Critical Facilites: Buildings of upmost importance in a post-disaster situation<br><br>
                     Communication Nodes: Buildings that have certain procedures in place in case of an earthquake</p>
-            </div>  
+            </div>
     <!--Form for saving a location to your account-->
         <div class="location-grp">
             <form>
-                    <fieldset>
+                    <fieldset class="location">
                             <legend>Location information:</legend>
                             Street Address:
                             <input id="addressID" type="textbox" name="address" value="">
@@ -51,16 +56,30 @@
                             </select>
                             <input id="submitButton" type="button" value="Save">
                         </fieldset>
-                        
             </form>
         </div>
+        <div class="savedLocations">
+            <fieldset class="saved_user_locations">
+                <legend>Manage Saved User Locations</legend>
+                <input id="HideShowButton" type="button" value="Show/Hide Data">
+                <input id="removeAll" type="button" value="Remove-Data">
+                <!-- <h3>User location 1: </h3> -->
+                <h3 class="userloc1"></h3>
+                <h3 class="userloc2"></h3>
+            </fieldset>
+        </div>
     </div>
-            
+
         <div class="inner" id="mapContent" style=" padding-top: 10px; padding-bottom: 10px; width:100%; height:600px;">Included Data</div>
         <!--About us button which will take you to about us page-->
         <button id="aboutUs" value="aboutUs.html" onclick="change_page(value)">About Us</button>
 
     </body>
-    
+    <script type='text/javascript'>
+        var d2 = new Date();
+        var endtime = d2.getTime();
+        var totaltime = (endtime - starttime)/1000;
+        document.getElementById("loadtime").innerHTML = 'Page loaded in: ' + totaltime +' seconds';
+        </script>
       <script src="./javascripts/index_script.js"></script>
 </html>

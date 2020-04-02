@@ -17,11 +17,13 @@
 <body>
   <div id="map"></div>
   <script>
+    var map;
     var data_layer_1;
     var data_layer_2;
     var data_layer_3;
     var dataMarkers = [];
     var userMarkers = [];
+    var userToggle = 0;
     var PORTLAND_OREGON_BOUNDS = {
       north: 45.9140699,
       south: 45.0140702,
@@ -32,9 +34,15 @@
       lat: 45.51407,
       lng: -122.7057
     };
+    var markerColor = {
+       orange: { icon: 'http://maps.google.com/mapfiles/kml/paddle/orange-circle.png' },
+       red: { icon: 'http://maps.google.com/mapfiles/kml/paddle/red-circle.png' },
+       blue: { icon: 'http://maps.google.com/mapfiles/kml/paddle/ltblu-circle.png'},
+       green: { icon: 'http://maps.google.com/mapfiles/kml/paddle/grn-circle.png'}
+     };
 
     function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
+      map = new google.maps.Map(document.getElementById('map'), {
         center: UNIVPORT,
         restriction: {
           latLngBounds: PORTLAND_OREGON_BOUNDS,
@@ -60,15 +68,134 @@
         var filterSelect = document.querySelector('input[name = "select2"]:checked').value;
         getFilter(filterSelect, map, dataMarkers);
       });
+
+      var showHide = 0;
+      loadUserData();
+      document.getElementById('HideShowButton').addEventListener('click', function() {
+        if(showHide == 0){
+          hideData();
+          showHide = 1;
+        } else {
+          showData();
+          showHide = 0;
+        }
+      });
+
+      document.getElementById('removeAll').addEventListener('click', function() {
+          removeUserData();
+      });
+
     } // Close of Initialize Map function
 
-    function geocodeAddress(geocoder, resultsMap, selectedColor) {
-      var markerColor = {
-        orange: { icon: 'http://maps.google.com/mapfiles/kml/paddle/orange-circle.png' },
-        red: { icon: 'http://maps.google.com/mapfiles/kml/paddle/red-circle.png' },
-        blue: { icon: 'http://maps.google.com/mapfiles/kml/paddle/ltblu-circle.png'},
-        green: { icon: 'http://maps.google.com/mapfiles/kml/paddle/grn-circle.png'}
+    // Hide user data points from the map
+    function hideData(){
+      for (var i = 0; i < userMarkers.length; i++)
+          userMarkers[i].setMap(null);
+    }
+
+    // Show user data points on the map
+    function showData(){
+      for (var i = 0; i < userMarkers.length; i++)
+          userMarkers[i].setMap(map);
+    }
+
+    function removeUserData(){
+
+      // Remove the data points from the map
+      hideData();
+      // empty the userMarkers array
+      userMarkers = [];
+
+    localStorage.setItem("loc1x", 0);
+    localStorage.setItem("loc1y", 0);
+    localStorage.setItem("loc1_name", '0');
+    localStorage.setItem("loc2x", 0);
+    localStorage.setItem("loc2y", 0);
+    localStorage.setItem("loc2_name", '0');
+    $('.userloc1').html("No location selected.");
+    $('.userloc2').html("No location selected.");
+
+    $.post("/",{
+    usrname: localStorage.getItem("whoami"),
+    loc1name: '0',
+    loc1x: 0,
+    loc1y: 0,
+    loc2name: '0',
+    loc2x: 0,
+    loc2y: 0,},
+    function(status){
+      console.log(staus);
+    });
+
+    }
+
+    // Load user data on page startup
+    function loadUserData(){
+
+      if(localStorage.getItem("loc1_name")=='0' || localStorage.getItem("loc1_name") == null){
+      } else {
+        var locLat = parseFloat(localStorage.getItem("loc1x"));
+        var locLng = parseFloat(localStorage.getItem("loc1y"));
+        var location = {
+          lat: locLat,
+          lng: locLng
+        };
+
+        // Ratchet random color selector
+        // had to get around the string-based dictionary
+        var rngNum = getRandomInt(0, 3);
+        var rngColor;
+        if(rngNum == 0){
+          rngColor = "red";
+        } else if (rngNum == 1){
+          rngColor = "blue";
+        } else if (rngNum == 2){
+          rngColor = "green";
+        } else {
+          rngColor = "orange";
+        }
+
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          icon: markerColor[rngColor].icon
+        });
+        userMarkers.push(marker);
       }
+
+      if(localStorage.getItem("loc2_name")=='0' || localStorage.getItem("loc2_name") == null){
+      } else {
+        var locLat = parseFloat(localStorage.getItem("loc2x"));
+        var locLng = parseFloat(localStorage.getItem("loc2y"));
+        var location = {
+          lat: locLat,
+          lng: locLng
+        };
+
+        // Ratchet random color selector
+        // had to get around the string-based dictionary
+        var rngNum = getRandomInt(0, 3);
+        var rngColor;
+        if(rngNum == 0){
+          rngColor = "red";
+        } else if (rngNum == 1){
+          rngColor = "blue";
+        } else if (rngNum == 2){
+          rngColor = "green";
+        } else {
+          rngColor = "orange";
+        }
+
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map,
+          icon: markerColor[rngColor].icon
+        });
+        userMarkers.push(marker);
+      }
+    }
+
+    function geocodeAddress(geocoder, resultsMap, selectedColor) {
       var address = document.getElementById('addressID').value;
       geocoder.geocode({
         'address': address
@@ -79,11 +206,75 @@
             position: results[0].geometry.location,
             icon: markerColor[selectedColor].icon
           });
-          var lat = marker.position.lat
-          var long = marker.position.lng
+          var lat = parseFloat(marker.position.lat());
+          var long = parseFloat(marker.position.lng());
           var name = document.getElementById('name').value;
           var user = localStorage.getItem("whoami");
-          $.post("/",{
+          //SAM CODE START
+          // if the use has a location in cookies (loaded on signin), any additional location saves
+          // will be in the second location slot.
+          if(localStorage.getItem("loc1_name")=='0' || localStorage.getItem("loc1_name") == null){
+            /* Updating local cookies as soon as the user presses the save button
+              is what I'm trying to do here (as well as in the other else if case).
+              This method does not work, it puts the function in the cookie instead of the value.
+              Any fixes?
+            */
+            localStorage.setItem("loc1_name", name);
+            localStorage.setItem("loc1x", lat);
+            localStorage.setItem("loc1y", long);
+            console.log("LAT AND LONG: ")
+            console.log(lat);
+            console.log(long);
+            $.post("/",{
+            usrname: user,
+            loc1name: name,
+            loc1x: lat,
+            loc1y: long,
+            loc2name: localStorage.getItem("loc2_name"),
+            loc2x: parseFloat(localStorage.getItem("loc2x")),
+            loc2y: parseFloat(localStorage.getItem("loc2y")),
+            },
+            function(status){
+              console.log(status);
+            });
+            userMarkers.push(marker);
+            $('.userloc1').html("User location 1: " + name);
+          }
+          //second location slot storage case
+          else if((localStorage.getItem("loc2_name")=='0' || localStorage.getItem("loc2_name") == null)
+              && (localStorage.getItem("loc1_name") !='0' || localStorage.getItem("loc1_name") != null)){
+
+            var local_1_name = localStorage.getItem("loc1_name");
+            var local_1x = parseFloat(localStorage.getItem("loc1x"));
+            var local_1y = parseFloat(localStorage.getItem("loc1y"));
+
+            localStorage.setItem("loc2_name", name);
+            localStorage.setItem("loc2x", lat);
+            localStorage.setItem("loc2y", long);
+            console.log("LAT AND LONG: ")
+            console.log(lat);
+            console.log(long);
+            $.post("/",{
+            usrname: user,
+            loc1name: localStorage.getItem("loc1_name"),
+            loc1x: parseFloat(localStorage.getItem("loc1x")),
+            loc1y: parseFloat(localStorage.getItem("loc1y")),
+            loc2name: name,
+            loc2x: lat,
+            loc2y: long,},
+            function(status){
+              console.log(staus);
+            });
+            userMarkers.push(marker);
+            $('.userloc2').html("User location 2: " + name);
+          } else {
+            alert("Max user points stored, please remove a point not in use.");
+          }
+          //SAM CODE END
+
+
+          // BEN CODE START
+          /*$.post("/",{
           usrname: user,
           loc1name: name,
           loc1x: lat,
@@ -94,11 +285,18 @@
           function(status){
             console.log(staus);
           });
-          userMarkers.push(marker);
+          userMarkers.push(marker);*/
         } else {
           alert('Address could not be found, please try again.');
-        }
+        } //BEN CODE END
       });
+    }
+
+    // Function to support random color select
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
 
     // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
@@ -113,7 +311,6 @@
         setData(map, 'https://opendata.arcgis.com/datasets/6e6185533d5447deb8b7204c27e1858e_92.geojson', data_layer_3);
       }
     } // end of getFilter function
-
     function setData(map, url, data_layer) {
       $.getJSON(url, function(data) {
         markers = data_layer.addGeoJson(data);
@@ -126,10 +323,10 @@
           for (var i = 0; i < dataMarkers.length; i++)
             data_layer.remove(dataMarkers[i]);
         });
-
       });
-  }
-    
+    }
+
+
   </script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsK-R6-CVye-TJUpkp6IY6_h1KXNH87F4&callback=initMap">
   </script>

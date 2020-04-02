@@ -9,6 +9,12 @@ $(document).ready(function(){
     if(windowWhoAmI != 'null'){
       alert("You are now logged out");
       localStorage.setItem("whoami",'null');
+      localStorage.setItem("loc1_name", '0');
+      localStorage.setItem("loc2_name", '0');
+      localStorage.setItem("loc1x", '0');
+      localStorage.setItem("loc1y", '0');
+      localStorage.setItem("loc2x", '0');
+      localStorage.setItem("loc2y", '0');
       return_home();
     }
     else{
@@ -18,12 +24,19 @@ $(document).ready(function(){
         for (var i = 0; i<data.length; i++){
           if(data[i].Username == user && data[i].password == pass){
             console.log("user found");
+            console.log(data[i]);
             var found = "true";
             localStorage.setItem("whoami",user);
+            localStorage.setItem("loc1_name", data[i].loc1_name);
+            localStorage.setItem("loc2_name",data[i].loc2_name);
+            localStorage.setItem("loc1x",data[i].loc1x);
+            localStorage.setItem("loc1y",data[i].loc1y);
+            localStorage.setItem("loc2x",data[i].loc2x);
+            localStorage.setItem("loc2y",data[i].loc2y);
           }
         }
         if(found == "true"){
-            alert("you are logged in");
+            alert("Welcome Back!");
             console.log("logged in");
             return_home();
         }
@@ -32,7 +45,7 @@ $(document).ready(function(){
           console.log("wrong username or password");
           console.log(user);
           console.log(pass);
-        }   
+        }
         }, "json"
         );
     }
