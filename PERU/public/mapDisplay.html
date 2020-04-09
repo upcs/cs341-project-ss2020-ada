@@ -268,27 +268,12 @@
             userMarkers.push(marker);
             $('.userloc2').html("User location 2: " + name);
           } else {
-            alert("Max user points stored, please remove a point not in use.");
+            alert("Max user points stored, this point will not be saved to user account.");
+            userMarkers.push(marker);
           }
-          //SAM CODE END
-
-
-          // BEN CODE START
-          /*$.post("/",{
-          usrname: user,
-          loc1name: name,
-          loc1x: lat,
-          loc1y: long,
-          loc2name: 0,
-          loc2x: 0,
-          loc2y: 0 ,},
-          function(status){
-            console.log(staus);
-          });
-          userMarkers.push(marker);*/
         } else {
           alert('Address could not be found, please try again.');
-        } //BEN CODE END
+        }
       });
     }
 
