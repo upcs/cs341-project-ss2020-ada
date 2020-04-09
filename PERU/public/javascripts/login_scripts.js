@@ -2,10 +2,13 @@ var whoAmI = null;
 
 $(document).ready(function(){
   var windowWhoAmI = localStorage.getItem("whoami");
+  /*
   if(windowWhoAmI!='null'){
     $(login).html("Log out");
   }
+  */
   $(login).click(function() {
+    /*
     if(windowWhoAmI != 'null'){
       alert("You are now logged out");
       localStorage.setItem("whoami",'null');
@@ -17,7 +20,9 @@ $(document).ready(function(){
       localStorage.setItem("loc2y", '0');
       return_home();
     }
-    else{
+    */
+    //else{
+    if(windowWhoAmI == 'null'){
       var user = $(username).val();
       var pass = $(password).val();
       $.post("/users",{ usrname: user, password: pass }, function(data){
