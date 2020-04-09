@@ -26,7 +26,7 @@ $(document).ready(function(){
       localStorage.setItem("loc1y", '0');
       localStorage.setItem("loc2x", '0');
       localStorage.setItem("loc2y", '0');
-
+      update_user_location_data();
     }
     else{
         return_login();
