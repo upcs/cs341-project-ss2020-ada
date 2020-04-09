@@ -24,6 +24,11 @@
     var dataMarkers = [];
     var userMarkers = [];
     var userToggle = 0;
+
+    var urmSwitch = 0;
+    var tocfSwitch = 0;
+    var ecnSwitch = 0;
+
     var PORTLAND_OREGON_BOUNDS = {
       north: 45.9140699,
       south: 45.0140702,
@@ -268,27 +273,12 @@
             userMarkers.push(marker);
             $('.userloc2').html("User location 2: " + name);
           } else {
-            alert("Max user points stored, please remove a point not in use.");
+            alert("Max user points stored, this point will not be saved to user account.");
+            userMarkers.push(marker);
           }
-          //SAM CODE END
-
-
-          // BEN CODE START
-          /*$.post("/",{
-          usrname: user,
-          loc1name: name,
-          loc1x: lat,
-          loc1y: long,
-          loc2name: 0,
-          loc2x: 0,
-          loc2y: 0 ,},
-          function(status){
-            console.log(staus);
-          });
-          userMarkers.push(marker);*/
         } else {
           alert('Address could not be found, please try again.');
-        } //BEN CODE END
+        }
       });
     }
 
@@ -302,13 +292,22 @@
     // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
     function getFilter(filtOP, map, dataMarkers) {
       if (filtOP == "urm") {
+        if (urmSwitch == 0){
         setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson', data_layer_1);
+        urmSwitch = 1;
+        }
       } else if (filtOP == "tier1") {
+        if(tocfSwitch == 0){
         data_layer_2.setStyle({icon: 'http://maps.google.com/mapfiles/kml/shapes/ranger_station.png'});
         setData(map, 'https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson', data_layer_2);
+        tocfSwitch = 1;
+        }
       } else if (filtOP == "eqcn") {
+        if (ecnSwitch == 0){
         data_layer_3.setStyle({icon: 'http://maps.google.com/mapfiles/kml/shapes/earthquake.png'});
         setData(map, 'https://opendata.arcgis.com/datasets/6e6185533d5447deb8b7204c27e1858e_92.geojson', data_layer_3);
+        ecnSwitch = 1;
+        }
       }
     } // end of getFilter function
     function setData(map, url, data_layer) {
@@ -322,6 +321,9 @@
         google.maps.event.addDomListener(document.getElementById('clear'), 'click', function() {
           for (var i = 0; i < dataMarkers.length; i++)
             data_layer.remove(dataMarkers[i]);
+          urmSwitch = 0;
+          tocfSwitch = 0;
+          ecnSwitch = 0;
         });
       });
     }
