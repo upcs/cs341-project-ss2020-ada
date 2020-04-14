@@ -6,6 +6,7 @@ $(document).ready(function(){
       var user = $('#user').val();
       var email = $('#email').val();
       var password = $('#password').val();
+      var hashed_pw = CryptoJS.MD5(password).toString();
       var message = "User Passwords must match the following complexity requirements:\n -> At least 8 characters long\n -> One Uppercase/Lowercase letter\n -> One digit 0-9\n -> One special character: !@#$%&*()";
       // Null Input validation
       if (user == '' || email == '' || password == '' ){
@@ -31,7 +32,7 @@ $(document).ready(function(){
               } else{
                 console.log("Attempting to insert user...");
                 alert("You are registered!");
-                insertNewUser(user,email,password);
+                insertNewUser(user,email,hashed_pw);
                 back2_login();
               }
          }, "json");
@@ -49,7 +50,6 @@ function isStrongPwd1(password) {
         // Test if the password matches the previous regex
         var validPassword = regExp.test(password);
         return validPassword;
-
 }
 
 
