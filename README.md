@@ -151,8 +151,3 @@ Bug Fixes and enhancements reported at the end of Sprint 4:
 
 
     News loading icon/page: added a loading-icon to the news page just in case the page doesn’t load immediately on click. 
-
- 
-
- 
-
