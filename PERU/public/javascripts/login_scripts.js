@@ -2,27 +2,23 @@ var whoAmI = null;
 
 $(document).ready(function(){
   var windowWhoAmI = localStorage.getItem("whoami");
+  /*
   if(windowWhoAmI!='null'){
     $(login).html("Log out");
   }
+  */
   $(login).click(function() {
-    if(windowWhoAmI != 'null'){
-      alert("You are now logged out");
-      localStorage.setItem("whoami",'null');
-      localStorage.setItem("loc1_name", '0');
-      localStorage.setItem("loc2_name", '0');
-      localStorage.setItem("loc1x", '0');
-      localStorage.setItem("loc1y", '0');
-      localStorage.setItem("loc2x", '0');
-      localStorage.setItem("loc2y", '0');
-      return_home();
-    }
-    else{
+    if(windowWhoAmI == 'null'){
       var user = $(username).val();
       var pass = $(password).val();
-      $.post("/users",{ usrname: user, password: pass }, function(data){
+      var hashed_pw = CryptoJS.MD5(pass).toString();
+      console.log(hashed_pw); 
+      $.post("/users",{ usrname: user, password: hashed_pw }, function(data){
+        console.log(data);
+        console.log("HELLO I AM HERE RIGHT NOW");
         for (var i = 0; i<data.length; i++){
-          if(data[i].Username == user && data[i].password == pass){
+          
+          if(data[i].Username == user && data[i].password == hashed_pw){
             console.log("user found");
             console.log(data[i]);
             var found = "true";

@@ -17,23 +17,39 @@
 <body>
   <div id="map"></div>
   <script>
+
+    // Variable containing the main map
     var map;
+    // Data layers representing each of the three seperate data filters
     var data_layer_1;
     var data_layer_2;
     var data_layer_3;
+    // Array containing the markers created by each data-layer
     var dataMarkers = [];
+    // Array of user-saved data points.
     var userMarkers = [];
+    // Toggle to control the Show/Hide switch for user data
     var userToggle = 0;
+
+    // Toggle variables to ensure that the filters can't be
+    // applied more than one time on the same map.
+    var urmSwitch = 0;
+    var tocfSwitch = 0;
+    var ecnSwitch = 0;
+
+    // Object for defining map bounds
     var PORTLAND_OREGON_BOUNDS = {
       north: 45.9140699,
       south: 45.0140702,
       west: -123.405,
       east: -121.909,
     };
+    // Object defining where the center of the map should be on loadup
     var UNIVPORT = {
       lat: 45.51407,
       lng: -122.7057
     };
+    // Color options for user-created markers.
     var markerColor = {
        orange: { icon: 'http://maps.google.com/mapfiles/kml/paddle/orange-circle.png' },
        red: { icon: 'http://maps.google.com/mapfiles/kml/paddle/red-circle.png' },
@@ -41,6 +57,7 @@
        green: { icon: 'http://maps.google.com/mapfiles/kml/paddle/grn-circle.png'}
      };
 
+     // Map initialization function
     function initMap() {
       map = new google.maps.Map(document.getElementById('map'), {
         center: UNIVPORT,
@@ -60,6 +77,7 @@
       // Create a geoencorder that will translate location details into coordinates
       var geocoder = new google.maps.Geocoder();
       document.getElementById('submitButton').addEventListener('click', function() {
+        // Set the color of the marker to whatever the user selected in the dropdown.
         var getColor = document.getElementById("colorSet");
         var currColor = getColor.options[getColor.selectedIndex].value;
         geocodeAddress(geocoder, map, currColor);
@@ -70,6 +88,7 @@
       });
 
       var showHide = 0;
+      // Load user location data from the database onto the map.
       loadUserData();
       document.getElementById('HideShowButton').addEventListener('click', function() {
         if(showHide == 0){
@@ -81,8 +100,17 @@
         }
       });
 
+      // Event listener to remove all user-stored datapoints from the database and the map.
       document.getElementById('removeAll').addEventListener('click', function() {
           removeUserData();
+      });
+
+      // Support function for Login/Logout functionality to also clear the user-points on the map.
+      document.getElementById('loginButton').addEventListener('click', function() {
+        // Remove the data points from the map
+        hideData();
+        // empty the userMarkers array
+        userMarkers = [];
       });
 
     } // Close of Initialize Map function
@@ -105,13 +133,14 @@
       hideData();
       // empty the userMarkers array
       userMarkers = [];
-
+    // Set the cookie-data stored by the website to default values.
     localStorage.setItem("loc1x", 0);
     localStorage.setItem("loc1y", 0);
     localStorage.setItem("loc1_name", '0');
     localStorage.setItem("loc2x", 0);
     localStorage.setItem("loc2y", 0);
     localStorage.setItem("loc2_name", '0');
+    // Reset the button text to correctly reflect current state
     $('.userloc1').html("No location selected.");
     $('.userloc2').html("No location selected.");
 
@@ -141,8 +170,7 @@
           lng: locLng
         };
 
-        // Ratchet random color selector
-        // had to get around the string-based dictionary
+        // Random Color generator used when re-loading previously saved user data-points
         var rngNum = getRandomInt(0, 3);
         var rngColor;
         if(rngNum == 0){
@@ -210,15 +238,10 @@
           var long = parseFloat(marker.position.lng());
           var name = document.getElementById('name').value;
           var user = localStorage.getItem("whoami");
-          //SAM CODE START
           // if the use has a location in cookies (loaded on signin), any additional location saves
           // will be in the second location slot.
           if(localStorage.getItem("loc1_name")=='0' || localStorage.getItem("loc1_name") == null){
-            /* Updating local cookies as soon as the user presses the save button
-              is what I'm trying to do here (as well as in the other else if case).
-              This method does not work, it puts the function in the cookie instead of the value.
-              Any fixes?
-            */
+
             localStorage.setItem("loc1_name", name);
             localStorage.setItem("loc1x", lat);
             localStorage.setItem("loc1y", long);
@@ -268,27 +291,13 @@
             userMarkers.push(marker);
             $('.userloc2').html("User location 2: " + name);
           } else {
-            alert("Max user points stored, please remove a point not in use.");
+            alert("Max user points stored, this point will not be saved to user account.");
+            // Still push the marker to userMarkers array as it needs to be kept track of for Show/Hide functionality
+            userMarkers.push(marker);
           }
-          //SAM CODE END
-
-
-          // BEN CODE START
-          /*$.post("/",{
-          usrname: user,
-          loc1name: name,
-          loc1x: lat,
-          loc1y: long,
-          loc2name: 0,
-          loc2x: 0,
-          loc2y: 0 ,},
-          function(status){
-            console.log(staus);
-          });
-          userMarkers.push(marker);*/
         } else {
           alert('Address could not be found, please try again.');
-        } //BEN CODE END
+        }
       });
     }
 
@@ -302,13 +311,22 @@
     // External Citation: https://stackoverflow.com/questions/23071775/how-to-remove-data-from-a-google-maps-data-layer
     function getFilter(filtOP, map, dataMarkers) {
       if (filtOP == "urm") {
+        if (urmSwitch == 0){
         setData(map, 'https://opendata.arcgis.com/datasets/f833fb14d5494bfa916bbde27be567ac_117.geojson', data_layer_1);
+        urmSwitch = 1;
+        }
       } else if (filtOP == "tier1") {
+        if(tocfSwitch == 0){
         data_layer_2.setStyle({icon: 'http://maps.google.com/mapfiles/kml/shapes/ranger_station.png'});
         setData(map, 'https://opendata.arcgis.com/datasets/3bda4323cddb4d0aa43a94c0c923df6e_39.geojson', data_layer_2);
+        tocfSwitch = 1;
+        }
       } else if (filtOP == "eqcn") {
+        if (ecnSwitch == 0){
         data_layer_3.setStyle({icon: 'http://maps.google.com/mapfiles/kml/shapes/earthquake.png'});
         setData(map, 'https://opendata.arcgis.com/datasets/6e6185533d5447deb8b7204c27e1858e_92.geojson', data_layer_3);
+        ecnSwitch = 1;
+        }
       }
     } // end of getFilter function
     function setData(map, url, data_layer) {
@@ -322,6 +340,9 @@
         google.maps.event.addDomListener(document.getElementById('clear'), 'click', function() {
           for (var i = 0; i < dataMarkers.length; i++)
             data_layer.remove(dataMarkers[i]);
+          urmSwitch = 0;
+          tocfSwitch = 0;
+          ecnSwitch = 0;
         });
       });
     }

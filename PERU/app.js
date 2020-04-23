@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+// var crypto = require("crypto");
 
 var indexRouter = require('./routes/index').router;
 var usersRouter = require('./routes/users').router;
@@ -42,3 +43,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+// module.exports.crypto = crypto;

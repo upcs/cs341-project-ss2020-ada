@@ -1,4 +1,9 @@
-window.onload = function(){
+$(".loader").show()
+$('div:not(.loader)').hide();
+// window.onload = function(){
+$(document).ready(function(){
+    $(".loader").hide()
+    $('div:not(.loader)').show();
     var windowWhoAmI = localStorage.getItem("whoami");
     var currButtonText = "";
     console.log(windowWhoAmI);
@@ -11,7 +16,7 @@ window.onload = function(){
       currButtonText = windowWhoAmI + "  logged in. Click to logout.";
       document.getElementById('loginButton').innerHTML = currButtonText;
     }
-}
+})
 
 function change_page(page) {
     window.location.href = page;

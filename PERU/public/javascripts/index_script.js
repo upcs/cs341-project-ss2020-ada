@@ -14,10 +14,30 @@ window.onload = function(){
     update_user_location_data();
   }
 }
+$(document).ready(function(){
+  $(loginButton).click(function() {
+    var windowWhoAmI = localStorage.getItem("whoami");
+    if(windowWhoAmI != 'null'){
+      document.getElementById('loginButton').innerHTML = "Login";
+      localStorage.setItem("whoami",'null');
+      localStorage.setItem("loc1_name", '0');
+      localStorage.setItem("loc2_name", '0');
+      localStorage.setItem("loc1x", '0');
+      localStorage.setItem("loc1y", '0');
+      localStorage.setItem("loc2x", '0');
+      localStorage.setItem("loc2y", '0');
+      update_user_location_data();
+    }
+    else{
+        return_login();
+    }
+  });
+});
 
 function change_page(value) {
     window.location.href = value;
-  }
+}
+
 function openNav(){document.getElementById("mySidepanel").style.width = "250px";}
 function closeNav() {document.getElementById("mySidepanel").style.width = "0";}
 
@@ -40,5 +60,8 @@ function update_user_location_data(){
   }
   else{$('.userloc2').html("User location 2: " + loc2_name);
   }
+}
+function return_login() {
+  window.location.href = "loginPage.html";
 }
 module.exports = {openNav, closeNav, update_user_location_data};
