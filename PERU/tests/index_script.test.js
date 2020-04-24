@@ -1,10 +1,8 @@
 'use strict';
 var fs = require('fs');
 var $ = require('../node_modules/jquery');
-const methods = require('../public/javascripts/index_script.js');
-
-var $ = require('../node_modules/jquery');
 window.$ = $;
+var methods = require('../public/javascripts/index_script.js');
 
  test('opening navigation panel', () => {
 	var html = fs.readFileSync('public/index.html', 'utf8');
@@ -32,3 +30,18 @@ window.$ = $;
 	 methods.update_user_location_data();
 	 expect($('.userloc2').html()).toEqual('No location selected.');
  });
+ 
+  test('function b is called', () => {
+  methods.b();
+  expect(methods.b()).toBeTruthy();
+});
+
+  test('function b is called', () => {
+  methods.b();
+  expect(methods.b()).toBeTruthy();
+});
+ 
+ test('function d is called', () => {
+  methods.d();
+  expect(methods.d()).toBeTruthy();
+});

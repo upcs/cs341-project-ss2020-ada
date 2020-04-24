@@ -1,6 +1,7 @@
 'use strict';
-window.onload = function(){
-  var windowWhoAmI = localStorage.getItem("whoami");
+var windowWhoAmI = localStorage.getItem("whoami");
+
+function b(){
   var currButtonText = "";
   console.log(windowWhoAmI);
   if(windowWhoAmI == null){
@@ -13,10 +14,12 @@ window.onload = function(){
     document.getElementById('loginButton').innerHTML = currButtonText;
     update_user_location_data();
   }
+  return true;
 }
-$(document).ready(function(){
+
+
+function d(){
   $(loginButton).click(function() {
-    var windowWhoAmI = localStorage.getItem("whoami");
     if(windowWhoAmI != 'null'){
       document.getElementById('loginButton').innerHTML = "Login";
       localStorage.setItem("whoami",'null');
@@ -32,7 +35,12 @@ $(document).ready(function(){
         return_login();
     }
   });
-});
+  return true;
+}
+
+$(document).ready(d);
+
+window.onload = b;
 
 function change_page(value) {
     window.location.href = value;
@@ -64,4 +72,4 @@ function update_user_location_data(){
 function return_login() {
   window.location.href = "loginPage.html";
 }
-module.exports = {openNav, closeNav, update_user_location_data};
+module.exports = {openNav, closeNav, update_user_location_data, b, d};
