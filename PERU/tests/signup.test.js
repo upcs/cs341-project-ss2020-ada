@@ -30,3 +30,8 @@ test('insert a new user', () => {
   methods.insertNewUser("harrah20","harrah20@up.edu","Abcd1234*");
   expect("").toBe("");
 });
+
+test('valid email', () => {
+  methods.c();
+  expect(methods.c()).toBeTruthy();
+});

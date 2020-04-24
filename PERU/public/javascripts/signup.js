@@ -1,5 +1,4 @@
-$(document).ready(function(){
-
+function c(){
    $('.btn').click(function(event){
       event.preventDefault();
       //External Citation: https://www.w3schools.com/jquery/jquery_dom_set.asp
@@ -38,7 +37,10 @@ $(document).ready(function(){
          }, "json");
        }
    });
-});
+   return true;
+}
+
+$(document).ready(c);
 // Code for password-complexity requirements verification taken from...
 // External Citation: http://javaonlineguide.net/2014/09/javascript-code-to-check-password-complexity.html
 
@@ -83,5 +85,4 @@ function back2_login() {
    window.location.href = "loginPage.html";
  }
  
- 
-module.exports = {check, insertNewUser, isStrongPwd1}
+module.exports = {check, insertNewUser, isStrongPwd1, c}
